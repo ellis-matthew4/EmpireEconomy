@@ -14,9 +14,11 @@ public final class EmpireEconomy extends JavaPlugin {
     private final DataStoreService dataStoreService = DataStoreService.getInstance();
     private final EmperorService emperorService = EmperorService.getInstance(this);
     private zoneEntryListener zel;
+    public static EmpireEconomy plugin;
 
     @Override
     public void onEnable() {
+        plugin = this;
         logger.info("Activating gamer mode...");
         zel = new zoneEntryListener(this);
         new CommandLoader()
@@ -33,6 +35,7 @@ public final class EmpireEconomy extends JavaPlugin {
                 .withCommand(new SetZoningRate())
                 .withCommand(new DeleteMoney())
                 .withCommand(new DeleteZone())
+                .withCommand(new SetSalesTax())
                 .load(this);
         new EventLoader()
                 .withEvent(new deathListener(this))

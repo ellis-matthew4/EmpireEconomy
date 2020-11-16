@@ -4,16 +4,20 @@ import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.Prompt;
 import org.bukkit.conversations.ValidatingPrompt;
 
-public class ZoneCreationPrompt extends ValidatingPrompt {
-    private int cost;
+import java.util.Arrays;
 
-    public ZoneCreationPrompt(int cost) {
+public class PaymentPrompt extends ValidatingPrompt {
+    private int cost;
+    private String[] validInputs;
+
+    public PaymentPrompt(int cost) {
         this.cost = cost;
+        this.validInputs = new String[]{"yes", "y", "confirm", "ok", "okay", "yea", "yeah", "accept", "k"};
     }
 
     @Override
     public String getPromptText(ConversationContext context) {
-        return "This operation will cost you $" + cost + ". Type confirm to continue.";
+        return "§e[SYSTEM] This operation will cost you $" + cost + ". Is this ok?";
     }
 
     @Override public boolean blocksForInput(ConversationContext context) {
@@ -22,7 +26,7 @@ public class ZoneCreationPrompt extends ValidatingPrompt {
 
     @Override
     protected boolean isInputValid(ConversationContext context, String input) {
-        return input.toLowerCase().equals("confirm");
+        return Arrays.stream(validInputs).anyMatch(input.toLowerCase()::equals);
     }
 
     @Override

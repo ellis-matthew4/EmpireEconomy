@@ -12,6 +12,7 @@ public class Data {
     public String challenger;
     public Integer zoningRate;
     public List<Zone> zones;
+    public Float salesTax;
 
     public void init() {
         if (currency == null) {
@@ -22,6 +23,9 @@ public class Data {
         }
         if (zones == null) {
             zones = new ArrayList<>();
+        }
+        if (salesTax == null) {
+            salesTax = (float) 0.0;
         }
     }
 }

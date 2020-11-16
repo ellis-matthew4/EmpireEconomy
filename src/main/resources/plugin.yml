@@ -40,6 +40,11 @@ commands:
     usage: /setzoningrate <cost>
     permission: ee.emperor
     permission-message: You must be Emperor to use this command.
+  setsalestax:
+    description: Sets the sales tax for the server. [Global]
+    usage: /setsalestax <value [0.0 - 1.0]>
+    permission: ee.emperor
+    permission-message: You must be Emperor to use this command.
   deletezone:
     description: Deletes one of your owned zones.
     usage: /deletezone <zone>

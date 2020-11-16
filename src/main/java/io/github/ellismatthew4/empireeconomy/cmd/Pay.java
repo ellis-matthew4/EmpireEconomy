@@ -1,37 +1,32 @@
 package io.github.ellismatthew4.empireeconomy.cmd;
 
 import io.github.ellismatthew4.empireeconomy.utils.CommandValidationHelper;
-import io.github.ellismatthew4.empireeconomy.EmpireEconomy;
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.YamlConfiguration;
+import io.github.ellismatthew4.empireeconomy.utils.TransactionService;
 import org.bukkit.entity.Player;
 
 public class Pay extends PluginCommand {
+    private TransactionService ts;
 
     public Pay() {
         super("pay");
+        this.ts = TransactionService.getInstance();
     }
 
-    // /pay <target> <amount>
     @Override
     public boolean onCommand(SenderContainer senderContainer, CommandCall commandCall) {
         Player p = senderContainer.getPlayer();
         Player target = commandCall.getArg(0).asPlayer();
         int amountToPay = commandCall.getArg(1).asInt();
-        int balance = data.currency.get(p.getDisplayName());
-        if (balance < amountToPay) {
+
+        boolean success = ts.transact(p, target, amountToPay);
+        if (!success) {
             p.sendMessage("You do not have enough money to do that.");
             return false;
+        } else {
+            p.sendMessage("You paid $" + amountToPay + " to " + target.getDisplayName());
+            target.sendMessage("You have been paid $" + amountToPay + " by " + p.getDisplayName());
+            return true;
         }
-        data.currency.put(p.getDisplayName(), balance - amountToPay);
-        data.currency.put(target.getDisplayName(), data.currency.get(target.getDisplayName()) + amountToPay);
-        p.sendMessage("You paid $" + amountToPay + " to " + target.getDisplayName());
-        target.sendMessage("You have been paid $" + amountToPay + " by " + p.getDisplayName());
-        return true;
     }
 
     @Override
