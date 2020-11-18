@@ -23,7 +23,7 @@ public class TransactionService {
         return instance;
     }
 
-    public boolean transact(Player from, Player to, int amount) {
+    public boolean transact(Player from, Player to, int amount, String successMsg) {
         int tax = getTaxAddon(amount);
         int total = tax + amount;
         Map<String, Integer> currency = DataStoreService.getInstance().data.currency;
@@ -48,8 +48,9 @@ public class TransactionService {
                                     EmperorService.getInstance().getEmpName(),
                                     currency.get(EmperorService.getInstance().getEmpName()) + tax
                             );
+                            from.sendMessage(successMsg);
                         } else {
-                            from.sendMessage("Transaction timed out.");
+                            from.sendMessage("§4[SYSTEM] Transaction timed out.");
                         }
                     });
             Conversation convo = cf.buildConversation(from);

@@ -12,6 +12,7 @@ public class ZoneHandler {
         if (zoneNotExists(z)) {
             zones.add(z);
         } else {
+            p.sendMessage("§4[SYSTEM] Claim failed. Is this area or name taken already?");
             return false;
         }
         return true;
