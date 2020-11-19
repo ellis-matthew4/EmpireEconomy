@@ -3,18 +3,15 @@ package io.github.ellismatthew4.empireeconomy.data;
 
 import org.bukkit.Location;
 
-public class Zone {
+public class Zone extends Property{
     public WLocation loc1;
     public WLocation loc2;
-    public String name;
-    public String owner;
     public String msg = "";
 
     public Zone(Location loc1, Location loc2, String owner, String name) {
+        super(name, owner);
         this.loc1 = new WLocation(loc1);
         this.loc2 = new WLocation(loc2);
-        this.owner = owner;
-        this.name = name;
     }
 
     public boolean inside(Location l) {
