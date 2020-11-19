@@ -3,6 +3,7 @@ version: ${project.version}
 main: io.github.ellismatthew4.empireeconomy.EmpireEconomy
 api-version: 1.16
 description: A plugin designed for the upcoming Empire server
+load: POSTWORLD
 commands:
   godmode:
     description: Become invincible.
@@ -38,6 +39,11 @@ commands:
   setzoningrate:
     description: Sets the cost of zoning per block.
     usage: /setzoningrate <cost>
+    permission: ee.emperor
+    permission-message: You must be Emperor to use this command.
+  setsalestax:
+    description: Sets the sales tax for the server. [Global]
+    usage: /setsalestax <value [0.0 - 1.0]>
     permission: ee.emperor
     permission-message: You must be Emperor to use this command.
   deletezone:

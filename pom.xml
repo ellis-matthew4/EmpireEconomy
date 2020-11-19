@@ -6,7 +6,7 @@
 
     <groupId>io.github.ellis-matthew4</groupId>
     <artifactId>EmpireEconomy</artifactId>
-    <version>0.2-prealpha</version>
+    <version>0.3-prealpha</version>
     <packaging>jar</packaging>
 
     <name>EmpireEconomy</name>
@@ -73,7 +73,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.16.3-R0.1-SNAPSHOT</version>
+            <version>1.16.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
