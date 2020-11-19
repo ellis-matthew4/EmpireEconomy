@@ -28,16 +28,19 @@ public class Warp extends PluginCommand {
         );
         if (wp == null) {
             p.sendMessage("§4[SYSTEM] Error 404: Warp not found.");
-        }
-            boolean success = ts.transact(p, emperorService.getEmperor(), wp.cost, "§e[SYSTEM] Warp successful!");
+        } else {
+            boolean success = ts.transact(p, emperorService.getEmperor(), wp.cost, () -> {
+                wp.warp(p);
+                p.sendMessage("§e[SYSTEM] Warp successful!");
+                return true;
+            });
             if (!success) {
                 if ((data.currency.get(p.getDisplayName()) > wp.cost))
                     p.sendMessage("§4[SYSTEM] Warp Failed.");
                 else
                     p.sendMessage("§4[SYSTEM] You don't have enough money to do this.");
-            } else {
-                wp.warp(p);
             }
+        }
         return true;
     }
 

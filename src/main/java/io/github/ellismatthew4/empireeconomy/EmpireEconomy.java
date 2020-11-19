@@ -41,6 +41,7 @@ public final class EmpireEconomy extends JavaPlugin {
                 .withCommand(new SetWarpCost())
                 .withCommand(new SetWarpCreationFee())
                 .withCommand(new Warp())
+                .withCommand(new DeleteWarp())
                 .load(this);
         new EventLoader()
                 .withEvent(new deathListener(this))

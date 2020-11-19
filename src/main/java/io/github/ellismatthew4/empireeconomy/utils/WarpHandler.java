@@ -11,7 +11,7 @@ public class WarpHandler {
     private final List<WarpPoint> wps = DataStoreService.getInstance().data.wps;
 
     public boolean addWarp(WarpPoint w) {
-        if (warpExists(w.name, w.owner)) {
+        if (!warpExists(w.name, w.owner)) {
             wps.add(w);
             return true;
         } else {

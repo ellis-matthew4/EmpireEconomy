@@ -8,14 +8,12 @@ public class WarpPoint extends Property {
     public WLocation location;
     public boolean isPrivate;
     public int cost;
-    private DataStoreService ds;
 
     public WarpPoint(String name, String owner, Location l, boolean isPrivate) {
         super(name, owner);
-        this.ds = DataStoreService.getInstance();
         this.location = new WLocation(l);
         this.isPrivate = isPrivate;
-        this.cost = ds.data.defaultWarpFee;
+        this.cost = DataStoreService.getInstance().data.defaultWarpFee;
     }
 
     public void setCost(int cost) {
@@ -23,7 +21,7 @@ public class WarpPoint extends Property {
     }
 
     public boolean warp(Player p) {
-        if (isPrivate && p.getDisplayName().equals(owner)) {
+        if (!isPrivate || p.getDisplayName().equals(owner)) {
             p.teleport(location.asLocation());
             return true;
         } else {

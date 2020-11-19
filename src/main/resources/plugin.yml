@@ -60,6 +60,9 @@ commands:
   createwarp:
     description: Creates a new Warp Point.
     usage: /createwarp <name> [public|private]
+  deletewarp:
+    description: Deletes a Warp Point.
+    usage: /deletewarp <name>
   setwarpcost:
     description: Sets the cost of the designated Warp Point.
     usage: /setwarpcost <name> <cost>

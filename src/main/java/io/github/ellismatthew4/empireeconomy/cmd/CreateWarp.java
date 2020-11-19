@@ -29,14 +29,16 @@ public class CreateWarp extends PluginCommand {
                 commandCall.getArg(1).arg.equalsIgnoreCase("private")
         );
         int creationFee = ds.data.warpCreationFee;
-            boolean success = ts.transact(p, emperorService.getEmperor(), creationFee, "§e[SYSTEM] Claim successful!")
-                    && warpHandler.addWarp(w);
+            boolean success = ts.transact(p, emperorService.getEmperor(), creationFee, () -> {
+                    boolean res = warpHandler.addWarp(w);
+                    if (res)
+                        p.sendMessage("§e[SYSTEM] Warp Creation Successful!");
+                    else
+                        p.sendMessage("§4[SYSTEM] Warp Creation Failed. Do you already have a warp with this name?");
+                    return true;
+                });
             if (!success) {
-                if ((data.currency.get(p.getDisplayName()) > creationFee))
-                    p.sendMessage("§4[SYSTEM] Warp Creation Failed. Do you already have a warp with this name?");
-                else
-                    p.sendMessage("§4[SYSTEM] You don't have enough money to do this.");
-
+                p.sendMessage("§4[SYSTEM] You don't have enough money to do this.");
             }
             return true;
     }

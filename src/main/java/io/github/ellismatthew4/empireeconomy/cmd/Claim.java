@@ -29,13 +29,16 @@ public class Claim extends PluginCommand {
         Location[] ls = cache.get(p);
         Zone z = new Zone(ls[0], ls[1], p.getDisplayName(), commandCall.getArg(0).arg);
         int zoningCost = data.zoningRate * z.area();
-            boolean success = ts.transact(p, emperorService.getEmperor(), zoningCost, "§e[SYSTEM] Claim successful!")
-                    && zoneHandler.addZone(p,z);
-            if (!success) {
-                if ((data.currency.get(p.getDisplayName()) > zoningCost))
-                    p.sendMessage("§4[SYSTEM] Claim failed. Is this area or name taken already?");
+            boolean success = ts.transact(p, emperorService.getEmperor(), zoningCost, () -> {
+                boolean res = zoneHandler.addZone(p,z);
+                if (res)
+                    p.sendMessage("§e[SYSTEM] Claim successful!");
                 else
-                    p.sendMessage("§4[SYSTEM] You don't have enough money to do this.");
+                    p.sendMessage("§4[SYSTEM] Claim failed. Is this area or name taken already?");
+                return true;
+            });
+            if (!success) {
+                p.sendMessage("§4[SYSTEM] You don't have enough money to do this.");
 
             }
             return true;

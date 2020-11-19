@@ -3,12 +3,16 @@ package io.github.ellismatthew4.empireeconomy.utils;
 import io.github.ellismatthew4.empireeconomy.EmpireEconomy;
 import io.github.ellismatthew4.empireeconomy.cmd.conversations.PaymentPrompt;
 import io.github.ellismatthew4.empireeconomy.permissions.EmperorService;
+import org.apache.commons.lang.ObjectUtils;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationFactory;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Map;
+import java.util.concurrent.Semaphore;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class TransactionService {
     private static TransactionService instance;
@@ -23,7 +27,7 @@ public class TransactionService {
         return instance;
     }
 
-    public boolean transact(Player from, Player to, int amount, String successMsg) {
+    public boolean transact(Player from, Player to, int amount, Supplier<Boolean> callback) {
         int tax = getTaxAddon(amount);
         int total = tax + amount;
         Map<String, Integer> currency = DataStoreService.getInstance().data.currency;
@@ -48,10 +52,11 @@ public class TransactionService {
                                     EmperorService.getInstance().getEmpName(),
                                     currency.get(EmperorService.getInstance().getEmpName()) + tax
                             );
-                            from.sendMessage(successMsg);
+                            callback.get();
                         } else {
                             from.sendMessage("§4[SYSTEM] Transaction timed out.");
                         }
+                        return;
                     });
             Conversation convo = cf.buildConversation(from);
             convo.begin();

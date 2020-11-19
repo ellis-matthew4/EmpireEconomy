@@ -27,6 +27,9 @@ public class Data {
         if (zones == null) {
             zones = new ArrayList<>();
         }
+        if (wps == null) {
+            wps = new ArrayList<>();
+        }
         if (salesTax == null) {
             salesTax = (float) 0.0;
         }
