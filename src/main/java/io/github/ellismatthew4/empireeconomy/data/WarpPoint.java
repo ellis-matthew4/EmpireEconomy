@@ -1,16 +1,25 @@
 package io.github.ellismatthew4.empireeconomy.data;
 
+import io.github.ellismatthew4.empireeconomy.utils.DataStoreService;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class WarpPoint extends Property {
     public WLocation location;
     public boolean isPrivate;
+    public int cost;
+    private DataStoreService ds;
 
     public WarpPoint(String name, String owner, Location l, boolean isPrivate) {
         super(name, owner);
+        this.ds = DataStoreService.getInstance();
         this.location = new WLocation(l);
         this.isPrivate = isPrivate;
+        this.cost = ds.data.defaultWarpFee;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public boolean warp(Player p) {

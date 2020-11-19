@@ -12,7 +12,10 @@ public class Data {
     public String challenger;
     public Integer zoningRate;
     public List<Zone> zones;
+    public List<WarpPoint> wps;
     public Float salesTax;
+    public Integer defaultWarpFee;
+    public Integer warpCreationFee;
 
     public void init() {
         if (currency == null) {
@@ -27,5 +30,15 @@ public class Data {
         if (salesTax == null) {
             salesTax = (float) 0.0;
         }
+        if (defaultWarpFee == null) {
+            defaultWarpFee = 10;
+        }
+        if (warpCreationFee == null) {
+            warpCreationFee = 100;
+        }
+    }
+
+    public int privateWarpCreationFee() {
+        return warpCreationFee * 2;
     }
 }
