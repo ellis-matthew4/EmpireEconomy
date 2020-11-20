@@ -5,6 +5,7 @@ import io.github.ellismatthew4.empireeconomy.utils.CommandValidationHelper;
 import io.github.ellismatthew4.empireeconomy.utils.DataStoreService;
 import io.github.ellismatthew4.empireeconomy.utils.TransactionService;
 import io.github.ellismatthew4.empireeconomy.utils.WarpHandler;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class Warp extends PluginCommand {
@@ -26,10 +27,11 @@ public class Warp extends PluginCommand {
                 commandCall.getArg(1).arg,
                 commandCall.getArg(0).arg
         );
-        if (wp == null) {
+        Player owner = Bukkit.getPlayer(commandCall.getArg(0).arg);
+        if (wp == null || !wp.canWarp(p)) {
             p.sendMessage("§4[SYSTEM] Error 404: Warp not found.");
         } else {
-            boolean success = ts.transact(p, emperorService.getEmperor(), wp.cost, () -> {
+            boolean success = ts.transact(p, owner, wp.cost, () -> {
                 wp.warp(p);
                 p.sendMessage("§e[SYSTEM] Warp successful!");
                 return true;

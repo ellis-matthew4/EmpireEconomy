@@ -10,7 +10,7 @@ public class SetWarpCost extends PluginCommand{
     private WarpHandler warpHandler;
 
     public SetWarpCost() {
-        super("setmessage");
+        super("setwarpcost");
         this.warpHandler = new WarpHandler();
     }
 

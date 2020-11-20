@@ -20,13 +20,12 @@ public class WarpPoint extends Property {
         this.cost = cost;
     }
 
+    public boolean canWarp(Player p) {
+        return (!isPrivate || p.getDisplayName().equals(owner));
+    }
+
     public boolean warp(Player p) {
-        if (!isPrivate || p.getDisplayName().equals(owner)) {
-            p.teleport(location.asLocation());
-            return true;
-        } else {
-            p.sendMessage("§4[SYSTEM] You do not own this warp point.");
-            return false;
-        }
+        p.teleport(location.asLocation());
+        return true;
     }
 }

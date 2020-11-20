@@ -22,13 +22,14 @@ public class CreateWarp extends PluginCommand {
     @Override
     public boolean onCommand(SenderContainer senderContainer, CommandCall commandCall) {
         Player p = senderContainer.getPlayer();
+        boolean privacy = commandCall.getArg(1).arg.equalsIgnoreCase("private");
         WarpPoint w = new WarpPoint(
                 commandCall.getArg(0).arg,
                 p.getDisplayName(),
                 p.getLocation(),
-                commandCall.getArg(1).arg.equalsIgnoreCase("private")
+                privacy
         );
-        int creationFee = ds.data.warpCreationFee;
+        int creationFee = ds.data.warpCreationFee * (privacy ? 2 : 1);
             boolean success = ts.transact(p, emperorService.getEmperor(), creationFee, () -> {
                     boolean res = warpHandler.addWarp(w);
                     if (res)
