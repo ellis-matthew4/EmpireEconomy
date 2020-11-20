@@ -54,6 +54,28 @@ commands:
     usage: /deletemoney <amount>
     permission: ee.emperor
     permission-message: You must be Emperor to use this command.
+  warp:
+    description: Teleports you to a Warp Point.
+    usage: /warp <player> <name>
+  createwarp:
+    description: Creates a new Warp Point.
+    usage: /createwarp <name> [public|private]
+  deletewarp:
+    description: Deletes a Warp Point.
+    usage: /deletewarp <name>
+  setwarpcost:
+    description: Sets the cost of the designated Warp Point.
+    usage: /setwarpcost <name> <cost>
+  setdefaultwarpfee:
+    description: Sets the default cost of using a Warp Point.
+    usage: /setdefaultwarpfee <cost>
+    permission-message: You must be Emperor to use this command.
+    permission: ee.emperor
+  setwarpcreationfee:
+    description: Sets the cost to create a Warp Point.
+    usage: /setwarpcreationfee <cost>
+    permission-message: You must be Emperor to use this command.
+    permission: ee.emperor
 permissions:
   ee.emperor:
     description: This permission is exclusive for Emperors

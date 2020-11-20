@@ -18,11 +18,12 @@ public class Pay extends PluginCommand {
         Player target = commandCall.getArg(0).asPlayer();
         int amountToPay = commandCall.getArg(1).asInt();
 
-        boolean success = ts.transact(p, target, amountToPay,
-                "§e[SYSTEM] You paid $" + amountToPay + " to " + target.getDisplayName());
-        if (success) {
-            target.sendMessage("§e[SYSTEM] You have been paid $" + amountToPay + " by " + p.getDisplayName());
-        } else {
+        boolean success = ts.transact(p, target, amountToPay, () -> {
+                    p.sendMessage("§e[SYSTEM] You paid $" + amountToPay + " to " + target.getDisplayName());
+                    target.sendMessage("§e[SYSTEM] You have been paid $" + amountToPay + " by " + p.getDisplayName());
+                    return true;
+                });
+        if (!success) {
             p.sendMessage("§4[SYSTEM] You do not have enough money to do this.");
         }
         return true;
