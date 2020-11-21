@@ -7,14 +7,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.InventoryView;
 
-public class shopClickListener implements Listener {
+public class shopCloseListener implements Listener {
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent e) {
-        Player p = (Player) e.getWhoClicked();
-        int slot = e.getSlot();
+    public void onInventoryClose(InventoryCloseEvent e) {
+        Player p = (Player) e.getPlayer();
         ZoneHandler zh = new ZoneHandler();
         Zone z = zh.getZone(p.getLocation());
         if (z != null) {
@@ -22,12 +22,6 @@ public class shopClickListener implements Listener {
             InventoryView inv = e.getView();
             if (shop != null && inv.getTitle().equals(shop.name)) {
                 shop.active = false;
-                e.setCancelled(true);
-                p.closeInventory();
-                boolean success = shop.purchase(slot, p);
-                if (!success) {
-                    p.sendMessage("§4[SYSTEM] You do not have enough money to buy that.");
-                }
             }
         }
     }

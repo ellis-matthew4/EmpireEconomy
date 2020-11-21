@@ -32,7 +32,7 @@ public class Shop extends Property {
         ItemStack item = l.asItemStack();
         int subtotal = l.subtotal;
         TransactionService ts = TransactionService.getInstance();
-        boolean success = ts.silentTransact(buyer, Bukkit.getPlayer(owner), subtotal);
+        boolean success = buyer.getDisplayName().equals(owner) || ts.silentTransact(buyer, Bukkit.getPlayer(owner), subtotal);
         if (success) {
             removeListing(i);
             buyer.getInventory().addItem(item);

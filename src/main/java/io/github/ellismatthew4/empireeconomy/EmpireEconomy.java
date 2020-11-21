@@ -52,6 +52,7 @@ public final class EmpireEconomy extends JavaPlugin {
                 .withEvent(new joinListener(this))
                 .withEvent(new playerClickListener(this))
                 .withEvent(new shopClickListener())
+                .withEvent(new shopCloseListener())
                 .load(this);
     }
 

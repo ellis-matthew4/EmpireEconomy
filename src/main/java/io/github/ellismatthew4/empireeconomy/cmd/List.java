@@ -26,7 +26,7 @@ public class List extends PluginCommand {
                     int cost = commandCall.getArg(0).asInt();
                     ItemStack item = p.getInventory().getItemInMainHand();
                     z.shop.addListing(new Listing(cost, item));
-                    p.getInventory().remove(item);
+                    p.getInventory().setItemInMainHand(null);
                     p.sendMessage("§e[SYSTEM] Listing added.");
                 } else {
                     p.sendMessage("§4[SYSTEM] This Shop is full. Either de-list an item or open another Shop.");

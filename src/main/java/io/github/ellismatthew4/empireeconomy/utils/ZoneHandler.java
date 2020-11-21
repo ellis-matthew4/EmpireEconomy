@@ -1,6 +1,8 @@
 package io.github.ellismatthew4.empireeconomy.utils;
 
+import io.github.ellismatthew4.empireeconomy.data.Listing;
 import io.github.ellismatthew4.empireeconomy.data.Zone;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -21,7 +23,13 @@ public class ZoneHandler {
 
     public boolean deleteZone(String name, String player) {
         for (int i = 0; i < zones.size(); i++) {
-            if (zones.get(i).name.equals(name) && zones.get(i).owner.equals(player)) {
+            Zone z = zones.get(i);
+            if (z.name.equals(name) && z.owner.equals(player)) {
+                if (z.shop != null) {
+                    for (Listing l : z.shop.listings) {
+                        Bukkit.getPlayer(z.owner).getInventory().addItem(l.asItemStack());
+                    }
+                }
                 zones.remove(i);
                 return true;
             }
