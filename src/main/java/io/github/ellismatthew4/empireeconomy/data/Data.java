@@ -33,6 +33,9 @@ public class Data {
         if (salesTax == null) {
             salesTax = (float) 0.0;
         }
+        if (zoningRate == null) {
+            zoningRate = 0;
+        }
         if (defaultWarpFee == null) {
             defaultWarpFee = 10;
         }

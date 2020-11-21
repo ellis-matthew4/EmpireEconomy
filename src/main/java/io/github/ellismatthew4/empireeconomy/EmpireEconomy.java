@@ -1,12 +1,9 @@
 package io.github.ellismatthew4.empireeconomy;
 
 import io.github.ellismatthew4.empireeconomy.cmd.*;
+import io.github.ellismatthew4.empireeconomy.events.*;
 import io.github.ellismatthew4.empireeconomy.permissions.EmperorService;
-import io.github.ellismatthew4.empireeconomy.events.playerClickListener;
-import io.github.ellismatthew4.empireeconomy.events.zoneEntryListener;
 import io.github.ellismatthew4.empireeconomy.utils.*;
-import io.github.ellismatthew4.empireeconomy.events.deathListener;
-import io.github.ellismatthew4.empireeconomy.events.joinListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EmpireEconomy extends JavaPlugin {
@@ -42,11 +39,16 @@ public final class EmpireEconomy extends JavaPlugin {
                 .withCommand(new SetWarpCreationFee())
                 .withCommand(new Warp())
                 .withCommand(new DeleteWarp())
+                .withCommand(new List())
+                .withCommand(new Shop())
+                .withCommand(new OpenShop())
+                .withCommand(new CloseShop())
                 .load(this);
         new EventLoader()
                 .withEvent(new deathListener(this))
                 .withEvent(new joinListener(this))
                 .withEvent(new playerClickListener(this))
+                .withEvent(new shopClickListener())
                 .load(this);
     }
 

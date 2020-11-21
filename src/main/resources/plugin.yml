@@ -76,6 +76,17 @@ commands:
     usage: /setwarpcreationfee <cost>
     permission-message: You must be Emperor to use this command.
     permission: ee.emperor
+  openshop:
+    description: Opens a new shop in the current Zone.
+    usage: /openshop <name>
+  closeshop:
+    description: Closes the shop in the current Zone.
+    usage: /closeshop
+  shop:
+    description: Opens the shop in the current Zone.
+  list:
+    description: Lists the item in your main hand to the shop in the current Zone.
+    usage: /list <cost>
 permissions:
   ee.emperor:
     description: This permission is exclusive for Emperors

@@ -7,11 +7,24 @@ public class Zone extends Property{
     public WLocation loc1;
     public WLocation loc2;
     public String msg = "";
+    public Shop shop;
 
     public Zone(Location loc1, Location loc2, String owner, String name) {
         super(name, owner);
         this.loc1 = new WLocation(loc1);
         this.loc2 = new WLocation(loc2);
+        this.shop = null;
+    }
+
+    public Zone(Location loc1, Location loc2, String owner, String name, Shop shop) {
+        super(name, owner);
+        this.loc1 = new WLocation(loc1);
+        this.loc2 = new WLocation(loc2);
+        this.shop = shop;
+    }
+
+    public void addShop(Shop shop) {
+        this.shop = shop;
     }
 
     public boolean inside(Location l) {
