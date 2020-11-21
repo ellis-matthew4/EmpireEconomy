@@ -20,6 +20,7 @@ public class shopClickListener implements Listener {
         Shop shop = z.shop;
         InventoryView inv = e.getView();
         if (shop != null && inv.getTitle().equals(shop.name)) {
+            shop.active = false;
             e.setCancelled(true);
             p.closeInventory();
             boolean success = shop.purchase(slot, p);

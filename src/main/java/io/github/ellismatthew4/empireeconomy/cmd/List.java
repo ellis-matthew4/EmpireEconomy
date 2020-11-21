@@ -22,11 +22,15 @@ public class List extends PluginCommand {
             p.sendMessage("§4[SYSTEM] You are not currently inside one of your zones.");
         } else {
             if (z.shop != null) {
-                int cost = commandCall.getArg(0).asInt();
-                ItemStack item = p.getInventory().getItemInMainHand();
-                z.shop.addListing(new Listing(cost, item));
-                p.getInventory().remove(item);
-                p.sendMessage("§e[SYSTEM] Listing added.");
+                if (z.shop.listings.size() < 27) {
+                    int cost = commandCall.getArg(0).asInt();
+                    ItemStack item = p.getInventory().getItemInMainHand();
+                    z.shop.addListing(new Listing(cost, item));
+                    p.getInventory().remove(item);
+                    p.sendMessage("§e[SYSTEM] Listing added.");
+                } else {
+                    p.sendMessage("§4[SYSTEM] This Shop is full. Either de-list an item or open another Shop.");
+                }
             } else {
                 p.sendMessage("§4[SYSTEM] There is no shop in this zone.");
             }

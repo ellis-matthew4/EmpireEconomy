@@ -19,7 +19,12 @@ public class Shop extends PluginCommand {
         if (z == null || z.shop == null) {
             p.sendMessage("§4[SYSTEM] You are not currently inside a shopping zone.");
         } else {
-            p.openInventory(z.shop.getMenu());
+            if (!z.shop.active) {
+                p.openInventory(z.shop.getMenu());
+                z.shop.active = true;
+            } else {
+                p.sendMessage("§4[SYSTEM] Someone is already interacting with this Shop.");
+            }
         }
         return true;
     }

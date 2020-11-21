@@ -1,5 +1,6 @@
 package io.github.ellismatthew4.empireeconomy.data;
 
+import com.google.gson.annotations.Expose;
 import io.github.ellismatthew4.empireeconomy.utils.TransactionService;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class Shop extends Property {
     public List<Listing> listings;
+    public transient boolean active = false;
 
     public Shop(String name, String owner) {
         super(name, owner);
