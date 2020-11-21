@@ -1,13 +1,8 @@
 package io.github.ellismatthew4.empireeconomy.cmd;
 
-import io.github.ellismatthew4.empireeconomy.EmpireEconomy;
 import io.github.ellismatthew4.empireeconomy.utils.CommandValidationHelper;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
-
-import java.text.DecimalFormat;
 
 public class FindEmperor extends PluginCommand {
 

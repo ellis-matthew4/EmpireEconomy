@@ -1,10 +1,12 @@
 package io.github.ellismatthew4.empireeconomy.utils;
 
 import io.github.ellismatthew4.empireeconomy.data.Data;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 
 public class DataStoreService {
     public HashMap<String, String> serverProperties;

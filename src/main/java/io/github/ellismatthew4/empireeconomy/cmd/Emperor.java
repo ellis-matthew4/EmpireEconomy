@@ -1,13 +1,8 @@
 package io.github.ellismatthew4.empireeconomy.cmd;
 
 import io.github.ellismatthew4.empireeconomy.utils.CommandValidationHelper;
-import io.github.ellismatthew4.empireeconomy.EmpireEconomy;
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class Emperor extends PluginCommand {
 

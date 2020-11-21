@@ -2,7 +2,8 @@ package io.github.ellismatthew4.empireeconomy.cmd;
 
 import io.github.ellismatthew4.empireeconomy.data.Shop;
 import io.github.ellismatthew4.empireeconomy.data.Zone;
-import io.github.ellismatthew4.empireeconomy.utils.*;
+import io.github.ellismatthew4.empireeconomy.utils.CommandValidationHelper;
+import io.github.ellismatthew4.empireeconomy.utils.ZoneHandler;
 import org.bukkit.entity.Player;
 
 public class OpenShop extends PluginCommand {
