@@ -3,15 +3,12 @@ package io.github.ellismatthew4.empireeconomy.utils;
 import io.github.ellismatthew4.empireeconomy.EmpireEconomy;
 import io.github.ellismatthew4.empireeconomy.cmd.conversations.PaymentPrompt;
 import io.github.ellismatthew4.empireeconomy.permissions.EmperorService;
-import org.apache.commons.lang.ObjectUtils;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationFactory;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Map;
-import java.util.concurrent.Semaphore;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class TransactionService {
@@ -62,6 +59,29 @@ public class TransactionService {
             convo.begin();
             return true;
         }
+    }
+
+    public boolean silentTransact(Player from, Player to, int amount) {
+        int tax = getTaxAddon(amount);
+        int total = tax + amount;
+        Map<String, Integer> currency = DataStoreService.getInstance().data.currency;
+        if (currency.get(from.getDisplayName()) < total) {
+            return false;
+        } else {
+            currency.put(
+                from.getDisplayName(),
+                currency.get(from.getDisplayName()) - total
+            );
+            currency.put(
+                    to.getDisplayName(),
+                    currency.get(to.getDisplayName()) + amount
+            );
+            currency.put(
+                    EmperorService.getInstance().getEmpName(),
+                    currency.get(EmperorService.getInstance().getEmpName()) + tax
+            );
+        }
+        return true;
     }
 
     public int getTaxAddon(int price) {
