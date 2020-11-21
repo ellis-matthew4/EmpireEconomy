@@ -9,7 +9,7 @@ public class DeleteWarp extends PluginCommand {
     WarpHandler warpHandler;
     public DeleteWarp() {
         super("deletewarp");
-        this.warpHandler = new WarpHandler();
+        this.warpHandler = WarpHandler.getInstance();
     }
 
     @Override

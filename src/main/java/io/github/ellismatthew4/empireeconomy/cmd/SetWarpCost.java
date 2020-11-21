@@ -11,7 +11,7 @@ public class SetWarpCost extends PluginCommand{
 
     public SetWarpCost() {
         super("setwarpcost");
-        this.warpHandler = new WarpHandler();
+        this.warpHandler = WarpHandler.getInstance();
     }
 
     @Override

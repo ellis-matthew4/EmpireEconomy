@@ -3,13 +3,15 @@ package io.github.ellismatthew4.empireeconomy.data;
 
 import org.bukkit.Location;
 
-public class Zone extends Property{
+public class Zone extends Property implements Comparable<Zone>{
     public WLocation loc1;
     public WLocation loc2;
     public String msg = "";
+    public String name="";
 
     public Zone(Location loc1, Location loc2, String owner, String name) {
         super(name, owner);
+        this.name = name;
         this.loc1 = new WLocation(loc1);
         this.loc2 = new WLocation(loc2);
     }
@@ -34,4 +36,10 @@ public class Zone extends Property{
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+    @Override
+	public int compareTo(Zone o) {
+		return name.toLowerCase().compareTo(o.name.toLowerCase());
+	//	return 0;
+	}
 }

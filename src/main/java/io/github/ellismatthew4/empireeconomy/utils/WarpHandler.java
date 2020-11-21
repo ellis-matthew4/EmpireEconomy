@@ -9,8 +9,25 @@ import java.util.List;
 
 public class WarpHandler {
     private final List<WarpPoint> wps = DataStoreService.getInstance().data.wps;
+    
+    private static WarpHandler single_instance = null; 
+    
+    
+    
+    private WarpHandler() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
+    public static WarpHandler getInstance() 
+    { 
+        if (single_instance == null) 
+            single_instance = new WarpHandler(); 
+  
+        return single_instance; 
+    } 
 
-    public boolean addWarp(WarpPoint w) {
+	public boolean addWarp(WarpPoint w) {
         if (!warpExists(w.name, w.owner)) {
             wps.add(w);
             return true;

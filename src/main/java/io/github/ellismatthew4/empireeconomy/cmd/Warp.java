@@ -17,7 +17,7 @@ public class Warp extends PluginCommand {
         super("warp");
         this.ds = DataStoreService.getInstance();
         this.ts = TransactionService.getInstance();
-        this.warpHandler = new WarpHandler();
+        this.warpHandler = WarpHandler.getInstance();
     }
 
     @Override
