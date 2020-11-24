@@ -6,7 +6,7 @@
 
     <groupId>io.github.ellis-matthew4</groupId>
     <artifactId>EmpireEconomy</artifactId>
-    <version>0.5-prealpha</version>
+    <version>0.6-prealpha</version>
     <packaging>jar</packaging>
 
     <name>EmpireEconomy</name>

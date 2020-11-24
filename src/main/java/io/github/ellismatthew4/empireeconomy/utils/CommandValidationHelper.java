@@ -5,6 +5,7 @@ import io.github.ellismatthew4.empireeconomy.cmd.CommandCall;
 import io.github.ellismatthew4.empireeconomy.cmd.PluginCommand;
 import io.github.ellismatthew4.empireeconomy.cmd.SenderContainer;
 import io.github.ellismatthew4.empireeconomy.data.Data;
+import io.github.ellismatthew4.empireeconomy.permissions.EmperorService;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -48,6 +49,14 @@ public class CommandValidationHelper {
             return false;
         }
         return true;
+    }
+
+    public boolean isSenderEmperor() {
+        if (EmperorService.getInstance().isEmperor(sender.getPlayer().getDisplayName())) {
+            return true;
+        }
+        warnAndSend("You must be Emperor to perform this command.");
+        return false;
     }
 
     public boolean isSenderPunished() {

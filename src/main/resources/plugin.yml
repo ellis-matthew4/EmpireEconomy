@@ -2,7 +2,7 @@ name: EmpireEconomy
 version: ${project.version}
 main: io.github.ellismatthew4.empireeconomy.EmpireEconomy
 api-version: 1.16
-description: A plugin designed for the upcoming Empire server
+description: A plugin designed for managing an Empire server
 load: POSTWORLD
 commands:
   godmode:
@@ -22,8 +22,6 @@ commands:
   createmoney:
     description: Prints new money. WARNING - CAN CAUSE INFLATION
     usage: /createmoney <amount>
-    permission: ee.emperor
-    permission-message: You must be Emperor to use this command.
   challenge:
     description: Issues a challenge to the Emperor, nerfing their powers until you are killed.
   findemperor:
@@ -39,21 +37,15 @@ commands:
   setzoningrate:
     description: Sets the cost of zoning per block.
     usage: /setzoningrate <cost>
-    permission: ee.emperor
-    permission-message: You must be Emperor to use this command.
   setsalestax:
     description: Sets the sales tax for the server. [Global]
     usage: /setsalestax <value [0.0 - 1.0]>
-    permission: ee.emperor
-    permission-message: You must be Emperor to use this command.
   deletezone:
     description: Deletes one of your owned zones.
     usage: /deletezone <zone>
   deletemoney:
     description: Deletes currency from your balance.
     usage: /deletemoney <amount>
-    permission: ee.emperor
-    permission-message: You must be Emperor to use this command.
   warp:
     description: Teleports you to a Warp Point.
     usage: /warp <player> <name>
@@ -69,13 +61,9 @@ commands:
   setdefaultwarpfee:
     description: Sets the default cost of using a Warp Point.
     usage: /setdefaultwarpfee <cost>
-    permission-message: You must be Emperor to use this command.
-    permission: ee.emperor
   setwarpcreationfee:
     description: Sets the cost to create a Warp Point.
     usage: /setwarpcreationfee <cost>
-    permission-message: You must be Emperor to use this command.
-    permission: ee.emperor
   openshop:
     description: Opens a new shop in the current Zone.
     usage: /openshop <name>
@@ -93,32 +81,19 @@ commands:
   writ:
     description: Creates a government-commissioned writ from the held Book and Quill.
     usage: /writ <title>
-    permission: ee.emperor
-    permission-message: You must be Emperor to use this command.
   punish:
     description: Repossesses all properties owned by the given player.
     usage: /punish <player>
-    permission: ee.emperor
-    permission-message: You must be Emperor to use this command.
   pardon:
     description: Returns all properties owned by the given player.
     usage: /pardon <player>
-    permission: ee.emperor
-    permission-message: You must be Emperor to use this command.
   fly:
     description: Toggles flight.
     usage: fly
-    permission: ee.emperor
-    permission-message: You must be Emperor to use this command.
   vanish:
     description: Toggles invisibility.
     usage: vanish
-    permission: ee.emperor
-    permission-message: You must be Emperor to use this command.
 permissions:
-  ee.emperor:
-    description: This permission is exclusive for Emperors
-    default: false
   ee.*:
     description: Administrator permissions
     default: op
