@@ -4,7 +4,10 @@ import io.github.ellismatthew4.empireeconomy.cmd.CommandArgument;
 import io.github.ellismatthew4.empireeconomy.cmd.CommandCall;
 import io.github.ellismatthew4.empireeconomy.cmd.PluginCommand;
 import io.github.ellismatthew4.empireeconomy.cmd.SenderContainer;
+import io.github.ellismatthew4.empireeconomy.data.Data;
 import org.bukkit.entity.Player;
+
+import java.util.Arrays;
 
 public class CommandValidationHelper {
     private final LoggerService logger = LoggerService.getInstance();
@@ -42,6 +45,15 @@ public class CommandValidationHelper {
     public boolean isSenderPlayer() {
         if (!sender.isPlayer()) {
             warn("Sender is not a Player");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isSenderPunished() {
+        String[] p = (String[]) DataStoreService.getInstance().data.punished.toArray();
+        if (Arrays.stream(p).anyMatch(sender.getPlayer().getDisplayName()::equals)) {
+            warnAndSend("You cannot do this while Punished. See the Emperor to be Pardoned.");
             return false;
         }
         return true;

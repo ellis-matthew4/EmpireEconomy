@@ -52,6 +52,13 @@ public class Zone extends Property{
     public void transfer(String newOwner) {
         owner = newOwner;
         shop.owner = newOwner;
+        shop.repo = true;
         repo = false;
+    }
+
+    @Override
+    public void returnToOwner() {
+        repo = false;
+        shop.repo = false;
     }
 }

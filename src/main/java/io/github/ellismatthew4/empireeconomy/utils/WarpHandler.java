@@ -2,6 +2,7 @@ package io.github.ellismatthew4.empireeconomy.utils;
 
 import io.github.ellismatthew4.empireeconomy.data.WarpPoint;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WarpHandler {
@@ -40,5 +41,21 @@ public class WarpHandler {
                 return w;
         }
         return null;
+    }
+
+    public void punish(String player) {
+        for (WarpPoint w : wps) {
+            if (w.name.equals(player)) {
+                w.repossess();
+            }
+        }
+    }
+
+    public void pardon(String player) {
+        for (WarpPoint w : wps) {
+            if (w.name.equals(player)) {
+                w.returnToOwner();
+            }
+        }
     }
 }

@@ -32,6 +32,6 @@ public class OpenShop extends PluginCommand {
 
     public boolean validate(SenderContainer senderContainer, CommandCall commandCall) {
         CommandValidationHelper validationHelper = new CommandValidationHelper(this, senderContainer, commandCall);
-        return validationHelper.isSenderPlayer() && validationHelper.isValidArgCount(1);
+        return validationHelper.isSenderPlayer() && validationHelper.isSenderPunished() && validationHelper.isValidArgCount(1);
     }
 }

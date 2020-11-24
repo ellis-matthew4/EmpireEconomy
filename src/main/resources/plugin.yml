@@ -90,6 +90,21 @@ commands:
   transfer:
     description: Transfers a property to another player.
     usage: /transfer <player> <name>
+  writ:
+    description: Creates a government-commissioned writ from the held Book and Quill.
+    usage: /writ <title>
+    permission: ee.emperor
+    permission-message: You must be Emperor to use this command.
+  punish:
+    description: Repossesses all properties owned by the given player.
+    usage: /punish <player>
+    permission: ee.emperor
+    permission-message: You must be Emperor to use this command.
+  pardon:
+    description: Returns all properties owned by the given player.
+    usage: /pardon <player>
+    permission: ee.emperor
+    permission-message: You must be Emperor to use this command.
 permissions:
   ee.emperor:
     description: This permission is exclusive for Emperors

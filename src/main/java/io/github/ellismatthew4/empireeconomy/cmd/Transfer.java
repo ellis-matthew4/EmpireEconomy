@@ -43,7 +43,7 @@ public class Transfer extends PluginCommand {
     @Override
     public boolean validate(SenderContainer senderContainer, CommandCall commandCall) {
         CommandValidationHelper validationHelper = new CommandValidationHelper(this, senderContainer, commandCall);
-        return validationHelper.isSenderPlayer() && validationHelper.isValidArgCount(2)
+        return validationHelper.isSenderPlayer() && validationHelper.isSenderPunished() && validationHelper.isValidArgCount(2)
                 && validationHelper.isValidPlayer(commandCall.getArg(1));
     }
 }

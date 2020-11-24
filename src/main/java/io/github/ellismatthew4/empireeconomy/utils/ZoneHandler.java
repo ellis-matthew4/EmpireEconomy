@@ -77,4 +77,20 @@ public class ZoneHandler {
     public Zone getZone(int i) {
         return zones.get(i);
     }
+
+    public void punish(String player) {
+        for (Zone z : zones) {
+            if (z.name.equals(player)) {
+                z.repossess();
+            }
+        }
+    }
+
+    public void pardon(String player) {
+        for (Zone z : zones) {
+            if (z.name.equals(player)) {
+                z.repossess();
+            }
+        }
+    }
 }

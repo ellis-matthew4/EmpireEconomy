@@ -13,6 +13,7 @@ public class Data {
     public Integer zoningRate;
     public List<Zone> zones;
     public List<WarpPoint> wps;
+    public List<String> punished;
     public Float salesTax;
     public Integer defaultWarpFee;
     public Integer warpCreationFee;
@@ -41,6 +42,9 @@ public class Data {
         }
         if (warpCreationFee == null) {
             warpCreationFee = 100;
+        }
+        if (punished == null) {
+            punished = new ArrayList<>();
         }
     }
 

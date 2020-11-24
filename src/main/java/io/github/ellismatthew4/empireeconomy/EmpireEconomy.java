@@ -47,6 +47,7 @@ public final class EmpireEconomy extends JavaPlugin {
                 .withCommand(new OpenShop())
                 .withCommand(new CloseShop())
                 .withCommand(new Transfer())
+                .withCommand(new Writ())
                 .load(this);
         new EventLoader()
                 .withEvent(new deathListener(this))
