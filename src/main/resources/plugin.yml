@@ -105,6 +105,16 @@ commands:
     usage: /pardon <player>
     permission: ee.emperor
     permission-message: You must be Emperor to use this command.
+  fly:
+    description: Toggles flight.
+    usage: fly
+    permission: ee.emperor
+    permission-message: You must be Emperor to use this command.
+  vanish:
+    description: Toggles invisibility.
+    usage: vanish
+    permission: ee.emperor
+    permission-message: You must be Emperor to use this command.
 permissions:
   ee.emperor:
     description: This permission is exclusive for Emperors

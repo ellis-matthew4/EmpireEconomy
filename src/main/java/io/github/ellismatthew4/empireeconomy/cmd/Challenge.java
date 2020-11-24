@@ -26,6 +26,8 @@ public class Challenge extends PluginCommand {
             return true;
         }
         data.challenger = p.getDisplayName();
+        e.setInvisible(false);
+        e.setAllowFlight(false);
         e.sendMessage("You have been challenged by " + p.getDisplayName() + "!");
         data.challengeActive = true;
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
