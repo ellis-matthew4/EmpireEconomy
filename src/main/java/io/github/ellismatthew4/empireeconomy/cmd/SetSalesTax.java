@@ -25,6 +25,7 @@ public class SetSalesTax extends PluginCommand {
 
     public boolean validate(SenderContainer senderContainer, CommandCall commandCall) {
         CommandValidationHelper validationHelper = new CommandValidationHelper(this, senderContainer, commandCall);
-        return validationHelper.isChallengeInactive(data.challengeActive) && validationHelper.isSenderPlayer() && validationHelper.isValidArgCount(1);
+        return validationHelper.isChallengeInactive(data.challengeActive) && validationHelper.isSenderPlayer()
+                && validationHelper.isValidArgCount(1) && validationHelper.isValidAmount(commandCall.getArg(0));
     }
 }

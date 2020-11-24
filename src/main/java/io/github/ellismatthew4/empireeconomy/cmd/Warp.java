@@ -48,6 +48,7 @@ public class Warp extends PluginCommand {
 
     public boolean validate(SenderContainer senderContainer, CommandCall commandCall) {
         CommandValidationHelper validationHelper = new CommandValidationHelper(this, senderContainer, commandCall);
-        return validationHelper.isSenderPlayer() && validationHelper.isValidArgCount(2);
+        return validationHelper.isSenderPlayer() && validationHelper.isValidArgCount(2)
+                && validationHelper.isValidPlayer(commandCall.getArg(0)) && validationHelper.isValidPlayer(commandCall.getArg(1));
     }
 }

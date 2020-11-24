@@ -47,4 +47,11 @@ public class Zone extends Property{
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+    @Override
+    public void transfer(String newOwner) {
+        owner = newOwner;
+        shop.owner = newOwner;
+        repo = false;
+    }
 }

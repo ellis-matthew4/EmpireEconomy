@@ -87,6 +87,9 @@ commands:
   list:
     description: Lists the item in your main hand to the shop in the current Zone.
     usage: /list <cost>
+  transfer:
+    description: Transfers a property to another player.
+    usage: /transfer <player> <name>
 permissions:
   ee.emperor:
     description: This permission is exclusive for Emperors

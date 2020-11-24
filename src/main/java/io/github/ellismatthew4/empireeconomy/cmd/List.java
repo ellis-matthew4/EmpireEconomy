@@ -23,11 +23,15 @@ public class List extends PluginCommand {
         } else {
             if (z.shop != null) {
                 if (z.shop.listings.size() < 27) {
-                    int cost = commandCall.getArg(0).asInt();
-                    ItemStack item = p.getInventory().getItemInMainHand();
-                    z.shop.addListing(new Listing(cost, item));
-                    p.getInventory().setItemInMainHand(null);
-                    p.sendMessage("§e[SYSTEM] Listing added.");
+                    if (p.getInventory().getItemInMainHand() == null) {
+                        int cost = commandCall.getArg(0).asInt();
+                        ItemStack item = p.getInventory().getItemInMainHand();
+                        z.shop.addListing(new Listing(cost, item));
+                        p.getInventory().setItemInMainHand(null);
+                        p.sendMessage("§e[SYSTEM] Listing added.");
+                    } else {
+                        p.sendMessage("You can't list that!");
+                    }
                 } else {
                     p.sendMessage("§4[SYSTEM] This Shop is full. Either de-list an item or open another Shop.");
                 }

@@ -1,6 +1,6 @@
 package io.github.ellismatthew4.empireeconomy.data;
 
-public class Property {
+public abstract class Property {
     public String name;
     public String owner;
     public boolean repo;
