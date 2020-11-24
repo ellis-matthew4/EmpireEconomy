@@ -27,21 +27,25 @@ public class Warp extends PluginCommand {
                 commandCall.getArg(1).arg,
                 commandCall.getArg(0).arg
         );
-        Player owner = Bukkit.getPlayer(commandCall.getArg(0).arg);
-        if (wp == null || !wp.canWarp(p)) {
-            p.sendMessage("§4[SYSTEM] Error 404: Warp not found.");
-        } else {
-            boolean success = ts.transact(p, owner, wp.cost, () -> {
-                wp.warp(p);
-                p.sendMessage("§e[SYSTEM] Warp successful!");
-                return true;
-            });
-            if (!success) {
-                if ((data.currency.get(p.getDisplayName()) > wp.cost))
-                    p.sendMessage("§4[SYSTEM] Warp Failed.");
-                else
-                    p.sendMessage("§4[SYSTEM] You don't have enough money to do this.");
+        if (!wp.repo) {
+            Player owner = Bukkit.getPlayer(commandCall.getArg(0).arg);
+            if (wp == null || !wp.canWarp(p)) {
+                p.sendMessage("§4[SYSTEM] Error 404: Warp not found.");
+            } else {
+                boolean success = ts.transact(p, owner, wp.cost, () -> {
+                    wp.warp(p);
+                    p.sendMessage("§e[SYSTEM] Warp successful!");
+                    return true;
+                });
+                if (!success) {
+                    if ((data.currency.get(p.getDisplayName()) > wp.cost))
+                        p.sendMessage("§4[SYSTEM] Warp Failed.");
+                    else
+                        p.sendMessage("§4[SYSTEM] You don't have enough money to do this.");
+                }
             }
+        } else {
+            p.sendMessage("§4[SYSTEM] The owner of this Warp Point is currently punished. Please try again later.");
         }
         return true;
     }

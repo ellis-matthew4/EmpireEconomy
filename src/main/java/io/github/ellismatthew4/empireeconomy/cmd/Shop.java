@@ -20,8 +20,12 @@ public class Shop extends PluginCommand {
             p.sendMessage("§4[SYSTEM] You are not currently inside a shopping zone.");
         } else {
             if (!z.shop.active) {
-                p.openInventory(z.shop.getMenu());
-                z.shop.active = true;
+                if (!z.shop.repo) {
+                    p.openInventory(z.shop.getMenu());
+                    z.shop.active = true;
+                } else {
+                    p.sendMessage("§4[SYSTEM] The owner of this shop is currently punished. Please try again later.");
+                }
             } else {
                 p.sendMessage("§4[SYSTEM] Someone is already interacting with this Shop.");
             }
