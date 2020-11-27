@@ -1,6 +1,6 @@
 package io.github.ellismatthew4.empireeconomy.data;
 
-public class Property {
+public abstract class Property implements Comparable<Property> {
     public String name;
     public String owner;
     public boolean repo;
@@ -28,5 +28,10 @@ public class Property {
     public void transfer(String newOwner) {
         owner = newOwner;
         repo = false;
+    }
+
+    @Override
+    public int compareTo(Property p) {
+        return name.compareToIgnoreCase(p.name);
     }
 }

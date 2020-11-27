@@ -1,6 +1,8 @@
 package io.github.ellismatthew4.empireeconomy.data;
 
 import io.github.ellismatthew4.empireeconomy.utils.DataStoreService;
+import io.github.ellismatthew4.empireeconomy.utils.WarpHandler;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -27,5 +29,17 @@ public class WarpPoint extends Property {
     public boolean warp(Player p) {
         p.teleport(location.asLocation());
         return true;
+    }
+
+    @Override
+    public void transfer(String newOwner) {
+        if (new WarpHandler().warpExists(name, newOwner)) {
+            Bukkit.getPlayer(newOwner).sendMessage(
+                    "§4[SYSTEM] You already have a Warp Point by that name, returning to previous owner."
+            );
+        } else {
+            owner = newOwner;
+            repo = false;
+        }
     }
 }

@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ZoneHandler {
@@ -14,6 +15,7 @@ public class ZoneHandler {
     public boolean addZone(Player p, Zone z) {
         if (zoneNotExists(z)) {
             zones.add(z);
+            Collections.sort(zones);
         } else {
             p.sendMessage("§4[SYSTEM] Claim failed. Is this area or name taken already?");
             return false;
@@ -65,20 +67,46 @@ public class ZoneHandler {
         return null;
     }
 
-    public int getZone(String name) {
-        for (int i = 0; i < zones.size(); i++) {
-            Zone z = zones.get(i);
-            if (z.name.equals(name))
-                return i;
+    public Zone getZone(String name) {
+        return bSearch(zones, name);
+    }
+
+    private Zone bSearch(List<Zone> zlist, String key) {
+        if (zlist.size() == 0) return null;
+        if (zlist.size() == 1) {
+            return key.compareToIgnoreCase(zlist.get(0).name) == 0 ? zlist.get(0) : null;
         }
-        return -1;
+        int i = (int) (zlist.size() / 2);
+        Zone pivot = zlist.get(i);
+        if (key.compareToIgnoreCase(pivot.name) < 0) {
+            return bSearch(zlist.subList(0, i), key);
+        } else if (key.compareToIgnoreCase(pivot.name) > 0) {
+            return bSearch(zlist.subList(i, zlist.size()), key);
+        } else {
+            if (key.compareToIgnoreCase(pivot.name) == 0)
+                return zlist.get(i);
+            else
+                return null;
+        }
     }
 
     public Zone getZone(int i) {
         return zones.get(i);
     }
 
-    public void setZoneMessage(int i, String msg) {
-        zones.get(i).setMsg(msg);
+    public void punish(String player) {
+        for (Zone z : zones) {
+            if (z.owner.equals(player)) {
+                z.repossess();
+            }
+        }
+    }
+
+    public void pardon(String player) {
+        for (Zone z : zones) {
+            if (z.owner.equals(player)) {
+                z.returnToOwner();
+            }
+        }
     }
 }

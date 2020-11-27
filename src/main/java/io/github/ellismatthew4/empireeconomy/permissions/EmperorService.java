@@ -10,24 +10,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class EmperorService {
     private static EmperorService instance = null;
     private final Data data = DataStoreService.getInstance().data;
-    public final JavaPlugin plugin;
     private String empName;
-    private PermissionAttachment permissionAttachment;
 
-    public EmperorService(JavaPlugin plugin) {
-        this.plugin = plugin;
+    public EmperorService() {
         this.empName = "";
     }
 
     public static EmperorService getInstance() {
-        return EmperorService.getInstance(null);
-    }
-
-    public static EmperorService getInstance(JavaPlugin plugin) {
         if (instance == null) {
             synchronized (EmperorService.class) {
                 if (instance == null) {
-                    instance = new EmperorService(plugin);
+                    instance = new EmperorService();
                 }
             }
         }
@@ -35,13 +28,8 @@ public class EmperorService {
     }
 
     private void _setEmperor(String playerName) {
-        if (!empName.isEmpty()) {
-            Bukkit.getPlayer(empName).removeAttachment(permissionAttachment);
-        }
         Player target = Bukkit.getPlayer(playerName);
         this.empName = target.getDisplayName();
-        this.permissionAttachment = target.addAttachment(plugin);
-        this.permissionAttachment.setPermission("ee.emperor", true);
     }
 
     public String getEmpName() {

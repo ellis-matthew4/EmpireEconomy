@@ -19,8 +19,13 @@ public class CommandCall {
         for(String arg: args) {
             if (concatenating == false) {
                 if (arg.charAt(0) == '"') {
-                    concatenatedArg += arg + ' ';
-                    concatenating = true;
+                    concatenatedArg += arg;
+                    if (arg.charAt(arg.length() - 1) != '"') {
+                        concatenatedArg += ' ';
+                        concatenating = true;
+                    } else {
+                        temp.add(new CommandArgument(concatenatedArg));
+                    }
                 } else {
                     temp.add(new CommandArgument(arg));
                 }

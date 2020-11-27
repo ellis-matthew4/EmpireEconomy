@@ -28,12 +28,12 @@ public class zoneEntryListener {
         Zone last = cache.get(p);
         Zone z = zoneHandler.getZone(p.getLocation());
         String message = "";
-        cache.put(p, z);
         if (z != null && last != z) {
             message = z.msg;
         }
         if (!message.isEmpty()) {
             p.sendMessage(message);
         }
+        cache.put(p, z);
     }
 }

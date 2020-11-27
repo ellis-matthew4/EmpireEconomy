@@ -31,6 +31,7 @@ public class Warp extends PluginCommand {
         if (wp == null || !wp.canWarp(p)) {
             p.sendMessage("§4[SYSTEM] Error 404: Warp not found.");
         } else {
+            if (!wp.repo) {
             boolean success = ts.transact(p, owner, wp.cost, () -> {
                 wp.warp(p);
                 p.sendMessage("§e[SYSTEM] Warp successful!");
@@ -42,12 +43,16 @@ public class Warp extends PluginCommand {
                 else
                     p.sendMessage("§4[SYSTEM] You don't have enough money to do this.");
             }
+        } else {
+                p.sendMessage("§4[SYSTEM] The owner of this Warp Point is currently punished. Please try again later.");
+            }
         }
         return true;
     }
 
     public boolean validate(SenderContainer senderContainer, CommandCall commandCall) {
         CommandValidationHelper validationHelper = new CommandValidationHelper(this, senderContainer, commandCall);
-        return validationHelper.isSenderPlayer() && validationHelper.isValidArgCount(2);
+        return validationHelper.isSenderPlayer() && validationHelper.isSenderPunished() && validationHelper.isValidArgCount(2)
+                && validationHelper.isValidPlayer(commandCall.getArg(0));
     }
 }
