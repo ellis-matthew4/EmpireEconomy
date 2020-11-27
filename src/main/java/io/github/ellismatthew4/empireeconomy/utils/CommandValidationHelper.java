@@ -62,7 +62,7 @@ public class CommandValidationHelper {
 
     public boolean isSenderPunished() {
         List<String> p = DataStoreService.getInstance().data.punished;
-        if (Arrays.stream(p.toArray()).anyMatch(sender.getPlayer().getDisplayName()::equals)) {
+        if (Arrays.stream(p.toArray(new String[0])).anyMatch(sender.getPlayer().getDisplayName()::equals)) {
             warnAndSend("You cannot do this while Punished. See the Emperor to be Pardoned.");
             return false;
         }
