@@ -4,6 +4,7 @@ import io.github.ellismatthew4.empireeconomy.data.Listing;
 import io.github.ellismatthew4.empireeconomy.data.Zone;
 import io.github.ellismatthew4.empireeconomy.utils.CommandValidationHelper;
 import io.github.ellismatthew4.empireeconomy.utils.ZoneHandler;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -23,7 +24,7 @@ public class List extends PluginCommand {
         } else {
             if (z.shop != null) {
                 if (z.shop.listings.size() < 27) {
-                    if (p.getInventory().getItemInMainHand() == null) {
+                    if (p.getInventory().getItemInMainHand().getType() != Material.AIR) {
                         int cost = commandCall.getArg(0).asInt();
                         ItemStack item = p.getInventory().getItemInMainHand();
                         z.shop.addListing(new Listing(cost, item));

@@ -7,9 +7,9 @@ import java.util.Map;
 
 public class Data {
     public Map<String, Integer> currency;
-    public Boolean challengeActive;
+    public transient Boolean challengeActive;
     public String emperor;
-    public String challenger;
+    public transient String challenger;
     public Integer zoningRate;
     public List<Zone> zones;
     public Map<String, List<WarpPoint>> wps;

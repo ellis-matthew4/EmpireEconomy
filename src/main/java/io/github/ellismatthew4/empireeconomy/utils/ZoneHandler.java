@@ -73,6 +73,9 @@ public class ZoneHandler {
 
     private Zone bSearch(List<Zone> zlist, String key) {
         if (zlist.size() == 0) return null;
+        if (zlist.size() == 1) {
+            return key.compareToIgnoreCase(zlist.get(0).name) == 0 ? zlist.get(0) : null;
+        }
         int i = (int) (zlist.size() / 2);
         Zone pivot = zlist.get(i);
         if (key.compareToIgnoreCase(pivot.name) < 0) {
@@ -93,7 +96,7 @@ public class ZoneHandler {
 
     public void punish(String player) {
         for (Zone z : zones) {
-            if (z.name.equals(player)) {
+            if (z.owner.equals(player)) {
                 z.repossess();
             }
         }
@@ -101,8 +104,8 @@ public class ZoneHandler {
 
     public void pardon(String player) {
         for (Zone z : zones) {
-            if (z.name.equals(player)) {
-                z.repossess();
+            if (z.owner.equals(player)) {
+                z.returnToOwner();
             }
         }
     }

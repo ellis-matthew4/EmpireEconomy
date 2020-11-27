@@ -19,7 +19,7 @@ public class Transfer extends PluginCommand {
         WarpHandler wh = new WarpHandler();
         Player p = senderContainer.getPlayer();
         Player target = commandCall.getArg(0).asPlayer();
-        String key = commandCall.getArg(0).arg;
+        String key = commandCall.getArg(1).arg;
         Property property = notNull(zh.getZone(key), wh.getWarp(key, p.getDisplayName()));
         if (property != null) {
             if ((property.owner.equals(p.getDisplayName()) && !property.repo)
@@ -44,6 +44,6 @@ public class Transfer extends PluginCommand {
     public boolean validate(SenderContainer senderContainer, CommandCall commandCall) {
         CommandValidationHelper validationHelper = new CommandValidationHelper(this, senderContainer, commandCall);
         return validationHelper.isSenderPlayer() && validationHelper.isSenderPunished() && validationHelper.isValidArgCount(2)
-                && validationHelper.isValidPlayer(commandCall.getArg(1));
+                && validationHelper.isValidPlayer(commandCall.getArg(0));
     }
 }

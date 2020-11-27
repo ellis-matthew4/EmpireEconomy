@@ -49,6 +49,9 @@ public class WarpHandler {
 
     private WarpPoint bSearch(List<WarpPoint> plist, String key) {
         if (plist.size() == 0) return null;
+        if (plist.size() == 1) {
+            return key.compareToIgnoreCase(plist.get(0).name) == 0 ? plist.get(0) : null;
+        }
         int i = (int) (plist.size() / 2);
         WarpPoint pivot = plist.get(i);
         if (key.compareToIgnoreCase(pivot.name) < 0) {
@@ -56,17 +59,14 @@ public class WarpHandler {
         } else if (key.compareToIgnoreCase(pivot.name) > 0) {
             return bSearch(plist.subList(i, plist.size()), key);
         } else {
-            if (key.compareToIgnoreCase(pivot.name) == 0)
-                return plist.get(i);
-            else
-                return null;
+            return plist.get(i);
         }
     }
 
     public void punish(String owner) {
         List<WarpPoint> wps = warps.get(owner) == null ? new ArrayList<WarpPoint>() : warps.get(owner);
         for (WarpPoint w : wps) {
-            if (w.name.equals(owner)) {
+            if (w.owner.equals(owner)) {
                 w.repossess();
             }
         }
@@ -75,7 +75,7 @@ public class WarpHandler {
     public void pardon(String owner) {
         List<WarpPoint> wps = warps.get(owner) == null ? new ArrayList<WarpPoint>() : warps.get(owner);
         for (WarpPoint w : wps) {
-            if (w.name.equals(owner)) {
+            if (w.owner.equals(owner)) {
                 w.returnToOwner();
             }
         }

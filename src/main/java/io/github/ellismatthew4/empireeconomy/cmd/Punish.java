@@ -1,14 +1,12 @@
 package io.github.ellismatthew4.empireeconomy.cmd;
 
 import io.github.ellismatthew4.empireeconomy.utils.CommandValidationHelper;
+import io.github.ellismatthew4.empireeconomy.utils.DataStoreService;
 import io.github.ellismatthew4.empireeconomy.utils.WarpHandler;
 import io.github.ellismatthew4.empireeconomy.utils.ZoneHandler;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BookMeta;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Punish extends PluginCommand {
 
@@ -19,8 +17,12 @@ public class Punish extends PluginCommand {
     @Override
     public boolean onCommand(SenderContainer senderContainer, CommandCall commandCall) {
         Player p = commandCall.getArg(0).asPlayer();
-        new ZoneHandler().punish(p.getDisplayName());
-        new WarpHandler().punish(p.getDisplayName());
+        List<String> punished = DataStoreService.getInstance().data.punished;
+        WarpHandler wh = new WarpHandler();
+        ZoneHandler zh = new ZoneHandler();
+        wh.punish(p.getDisplayName());
+        zh.punish(p.getDisplayName());
+        punished.add(p.getDisplayName());
         p.sendMessage("§4[SYSTEM] The Emperor has ordered you punished. Please contact the Emperor to be pardoned.");
         return true;
     }

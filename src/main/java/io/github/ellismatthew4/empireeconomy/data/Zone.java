@@ -51,14 +51,24 @@ public class Zone extends Property{
     @Override
     public void transfer(String newOwner) {
         owner = newOwner;
-        shop.owner = newOwner;
-        shop.repo = true;
         repo = false;
+        if (shop != null) {
+            shop.owner = newOwner;
+            shop.repo = false;
+        }
     }
 
     @Override
     public void returnToOwner() {
         repo = false;
-        shop.repo = false;
+        if (shop != null)
+            shop.repo = false;
+    }
+
+    @Override
+    public void repossess() {
+        repo = true;
+        if (shop != null)
+            shop.repo = true;
     }
 }
