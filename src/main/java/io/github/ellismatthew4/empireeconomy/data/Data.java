@@ -12,7 +12,7 @@ public class Data {
     public String challenger;
     public Integer zoningRate;
     public List<Zone> zones;
-    public List<WarpPoint> wps;
+    public Map<String, List<WarpPoint>> wps;
     public List<String> punished;
     public Float salesTax;
     public Integer defaultWarpFee;
@@ -29,7 +29,7 @@ public class Data {
             zones = new ArrayList<>();
         }
         if (wps == null) {
-            wps = new ArrayList<>();
+            wps = new HashMap<>();
         }
         if (salesTax == null) {
             salesTax = (float) 0.0;

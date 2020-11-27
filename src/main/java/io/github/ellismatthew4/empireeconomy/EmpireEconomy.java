@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class EmpireEconomy extends JavaPlugin {
     private final LoggerService logger = LoggerService.getInstance(getLogger());
     private final DataStoreService dataStoreService = DataStoreService.getInstance();
-    private final EmperorService emperorService = EmperorService.getInstance(this);
+    private final EmperorService emperorService = EmperorService.getInstance();
     private zoneEntryListener zel;
     public static EmpireEconomy plugin;
 

@@ -9,6 +9,7 @@ import io.github.ellismatthew4.empireeconomy.permissions.EmperorService;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class CommandValidationHelper {
     private final LoggerService logger = LoggerService.getInstance();
@@ -60,8 +61,8 @@ public class CommandValidationHelper {
     }
 
     public boolean isSenderPunished() {
-        String[] p = (String[]) DataStoreService.getInstance().data.punished.toArray();
-        if (Arrays.stream(p).anyMatch(sender.getPlayer().getDisplayName()::equals)) {
+        List<String> p = DataStoreService.getInstance().data.punished;
+        if (Arrays.stream(p.toArray()).anyMatch(sender.getPlayer().getDisplayName()::equals)) {
             warnAndSend("You cannot do this while Punished. See the Emperor to be Pardoned.");
             return false;
         }
