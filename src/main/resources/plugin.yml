@@ -96,6 +96,9 @@ commands:
   properties:
     description: Lists all properties a player owns under a given category.
     usage: /properties <player> [warps|zones|all]
+  batchlist:
+    description: Goes through all items in your inventory and tries to list each one.
+    usage: /batchlist
 permissions:
   ee.*:
     description: Administrator permissions
