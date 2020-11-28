@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -88,6 +89,17 @@ public class ZoneHandler {
             else
                 return null;
         }
+    }
+
+    public List<Zone> zonesByPlayer(Player p) {
+        String key = p.getDisplayName();
+        ArrayList<Zone> result = new ArrayList<Zone>();
+        for (Zone z : zones) {
+            if (z.owner.equals(key)) {
+                result.add(z);
+            }
+        }
+        return result;
     }
 
     public Zone getZone(int i) {

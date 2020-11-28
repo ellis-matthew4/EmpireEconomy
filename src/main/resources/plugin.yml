@@ -93,6 +93,9 @@ commands:
   vanish:
     description: Toggles invisibility.
     usage: vanish
+  properties:
+    description: Lists all properties a player owns under a given category.
+    usage: /properties <player> [warps|zones|all]
 permissions:
   ee.*:
     description: Administrator permissions

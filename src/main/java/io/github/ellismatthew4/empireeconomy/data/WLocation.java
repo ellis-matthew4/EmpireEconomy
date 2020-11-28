@@ -19,4 +19,8 @@ public class WLocation {
     public Location asLocation() {
         return new Location(Bukkit.getWorld(world), x, y, z);
     }
+
+    public String toString() {
+        return "X: " + x + " Y: " + y + " Z: " + z;
+    }
 }
