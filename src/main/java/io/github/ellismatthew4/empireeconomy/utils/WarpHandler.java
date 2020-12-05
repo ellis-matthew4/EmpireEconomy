@@ -1,7 +1,6 @@
 package io.github.ellismatthew4.empireeconomy.utils;
 
 import io.github.ellismatthew4.empireeconomy.data.WarpPoint;
-import io.github.ellismatthew4.empireeconomy.data.Zone;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;

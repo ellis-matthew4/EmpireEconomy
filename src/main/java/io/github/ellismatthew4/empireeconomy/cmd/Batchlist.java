@@ -2,16 +2,12 @@ package io.github.ellismatthew4.empireeconomy.cmd;
 
 import io.github.ellismatthew4.empireeconomy.EmpireEconomy;
 import io.github.ellismatthew4.empireeconomy.cmd.conversations.ListingPrompt;
-import io.github.ellismatthew4.empireeconomy.data.Listing;
 import io.github.ellismatthew4.empireeconomy.data.Zone;
 import io.github.ellismatthew4.empireeconomy.utils.CommandValidationHelper;
 import io.github.ellismatthew4.empireeconomy.utils.ZoneHandler;
-import org.bukkit.Material;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationFactory;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class Batchlist extends PluginCommand {
 

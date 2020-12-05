@@ -9,8 +9,6 @@ import org.bukkit.conversations.ValidatingPrompt;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
-
 public class ListingPrompt extends ValidatingPrompt {
     private ItemStack item;
     private Inventory inv;

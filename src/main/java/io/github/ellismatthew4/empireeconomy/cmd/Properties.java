@@ -2,8 +2,11 @@ package io.github.ellismatthew4.empireeconomy.cmd;
 
 import io.github.ellismatthew4.empireeconomy.data.WarpPoint;
 import io.github.ellismatthew4.empireeconomy.data.Zone;
-import io.github.ellismatthew4.empireeconomy.utils.*;
+import io.github.ellismatthew4.empireeconomy.utils.CommandValidationHelper;
+import io.github.ellismatthew4.empireeconomy.utils.WarpHandler;
+import io.github.ellismatthew4.empireeconomy.utils.ZoneHandler;
 import org.bukkit.entity.Player;
+
 import java.util.List;
 
 public class Properties extends PluginCommand {

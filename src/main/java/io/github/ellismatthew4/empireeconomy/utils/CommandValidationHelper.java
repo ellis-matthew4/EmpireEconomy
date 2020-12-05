@@ -4,11 +4,9 @@ import io.github.ellismatthew4.empireeconomy.cmd.CommandArgument;
 import io.github.ellismatthew4.empireeconomy.cmd.CommandCall;
 import io.github.ellismatthew4.empireeconomy.cmd.PluginCommand;
 import io.github.ellismatthew4.empireeconomy.cmd.SenderContainer;
-import io.github.ellismatthew4.empireeconomy.data.Data;
 import io.github.ellismatthew4.empireeconomy.permissions.EmperorService;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class CommandValidationHelper {

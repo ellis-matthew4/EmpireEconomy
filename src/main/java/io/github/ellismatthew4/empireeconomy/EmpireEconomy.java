@@ -14,6 +14,7 @@ public final class EmpireEconomy extends JavaPlugin {
     private final DataStoreService dataStoreService = DataStoreService.getInstance();
     private final EmperorService emperorService = EmperorService.getInstance();
     private zoneEntryListener zel;
+    private backupEvent be;
     public static EmpireEconomy plugin;
 
     @Override
@@ -21,6 +22,7 @@ public final class EmpireEconomy extends JavaPlugin {
         plugin = this;
         logger.info("Activating gamer mode...");
         zel = new zoneEntryListener(this);
+        be = new backupEvent(this);
         new CommandLoader()
                 .withCommand(new CreateMoney())
                 .withCommand(new Balance())

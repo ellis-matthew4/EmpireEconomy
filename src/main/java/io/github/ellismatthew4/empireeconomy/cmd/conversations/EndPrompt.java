@@ -3,9 +3,6 @@ package io.github.ellismatthew4.empireeconomy.cmd.conversations;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.MessagePrompt;
 import org.bukkit.conversations.Prompt;
-import org.bukkit.conversations.ValidatingPrompt;
-
-import java.util.Arrays;
 
 public class EndPrompt extends MessagePrompt {
 

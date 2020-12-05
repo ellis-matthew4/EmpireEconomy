@@ -4,8 +4,6 @@ import io.github.ellismatthew4.empireeconomy.data.Data;
 import io.github.ellismatthew4.empireeconomy.utils.DataStoreService;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class EmperorService {
     private static EmperorService instance = null;
