@@ -14,6 +14,11 @@ public final class EmpireEconomy extends JavaPlugin {
     private final DataStoreService dataStoreService = DataStoreService.getInstance();
     private final EmperorService emperorService = EmperorService.getInstance();
     private zoneEntryListener zel;
+<<<<<<< Updated upstream
+=======
+    private backupEvent be;
+    private dailyEvent de;
+>>>>>>> Stashed changes
     public static EmpireEconomy plugin;
 
     @Override
@@ -21,6 +26,11 @@ public final class EmpireEconomy extends JavaPlugin {
         plugin = this;
         logger.info("Activating gamer mode...");
         zel = new zoneEntryListener(this);
+<<<<<<< Updated upstream
+=======
+        be = new backupEvent(this);
+        de = new dailyEvent(this);
+>>>>>>> Stashed changes
         new CommandLoader()
                 .withCommand(new CreateMoney())
                 .withCommand(new Balance())
@@ -52,6 +62,12 @@ public final class EmpireEconomy extends JavaPlugin {
                 .withCommand(new Pardon())
                 .withCommand(new Vanish(this))
                 .withCommand(new Fly(this))
+<<<<<<< Updated upstream
+=======
+                .withCommand(new Properties())
+                .withCommand(new Batchlist())
+                .withCommand(new Stats())
+>>>>>>> Stashed changes
                 .load(this);
         new EventLoader()
                 .withEvent(new deathListener(this))

@@ -1,6 +1,7 @@
 package io.github.ellismatthew4.empireeconomy.utils;
 
 import io.github.ellismatthew4.empireeconomy.data.Listing;
+import io.github.ellismatthew4.empireeconomy.data.Shop;
 import io.github.ellismatthew4.empireeconomy.data.Zone;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -108,5 +109,20 @@ public class ZoneHandler {
                 z.returnToOwner();
             }
         }
+    }
+
+    // Returns either the first shop with the given name, or the shop in the current zone if the name matches
+    public Shop getShop(Location l, String shopName) {
+        Zone current = getZone(l);
+        if (current != null && current.shop != null && current.shop.name.equalsIgnoreCase(shopName)) {
+            return current.shop;
+        } else {
+            for (Zone z : zones) {
+                if (z.shop != null && z.shop.name.equalsIgnoreCase(shopName)) {
+                    return z.shop;
+                }
+            }
+        }
+        return null;
     }
 }

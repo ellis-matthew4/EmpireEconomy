@@ -1,5 +1,10 @@
 package io.github.ellismatthew4.empireeconomy.data;
 
+import io.github.ellismatthew4.empireeconomy.utils.LoggerService;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +22,8 @@ public class Data {
     public Float salesTax;
     public Integer defaultWarpFee;
     public Integer warpCreationFee;
+    public LocalDate lastStatUpdate;
+    public Map<String, Integer[]> stats;
 
     public void init() {
         if (currency == null) {
@@ -46,9 +53,23 @@ public class Data {
         if (punished == null) {
             punished = new ArrayList<>();
         }
+        if (lastStatUpdate == null) {
+            this.lastStatUpdate = LocalDate.now().minus(1, ChronoUnit.DAYS);
+        }
+        if (stats == null) {
+            stats = new HashMap<>();
+        }
     }
 
     public int privateWarpCreationFee() {
         return warpCreationFee * 2;
+    }
+
+    public void clearStats() {
+        if (!LocalDate.now().isEqual(this.lastStatUpdate)) {
+            LoggerService.getInstance().info("Stats have expired. Clearing...");
+            this.lastStatUpdate = LocalDate.now();
+            this.stats = new HashMap<>();
+        }
     }
 }

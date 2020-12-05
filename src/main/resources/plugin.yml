@@ -93,6 +93,18 @@ commands:
   vanish:
     description: Toggles invisibility.
     usage: vanish
+<<<<<<< Updated upstream
+=======
+  properties:
+    description: Lists all properties a player owns under a given category.
+    usage: /properties <player> [warps|zones|all]
+  batchlist:
+    description: Goes through all items in your inventory and tries to list each one.
+    usage: /batchlist
+  stats:
+    description: Displays today's stats for a given shop. Stand in the shop's zone for the greatest accuracy.
+    usage: /stats <shop>
+>>>>>>> Stashed changes
 permissions:
   ee.*:
     description: Administrator permissions

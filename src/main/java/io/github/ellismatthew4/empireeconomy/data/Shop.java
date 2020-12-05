@@ -1,5 +1,6 @@
 package io.github.ellismatthew4.empireeconomy.data;
 
+import io.github.ellismatthew4.empireeconomy.utils.DataStoreService;
 import io.github.ellismatthew4.empireeconomy.utils.TransactionService;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -36,6 +37,7 @@ public class Shop extends Property {
         if (success) {
             removeListing(i);
             buyer.getInventory().addItem(item);
+            DataStoreService.getInstance().postTransaction(name, subtotal);
         }
         return success;
     }
