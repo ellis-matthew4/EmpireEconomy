@@ -29,36 +29,39 @@ public class TransactionService {
         int total = tax + amount;
         Map<String, Integer> currency = DataStoreService.getInstance().data.currency;
         if (currency.get(from.getDisplayName()) < total) {
-            return false;
-        } else {
-            ConversationFactory cf = new ConversationFactory(plugin);
-            cf.withFirstPrompt(new PaymentPrompt(total))
-                    .withTimeout(5)
-                    .addConversationAbandonedListener((event) -> {
-                        boolean success = event.gracefulExit();
-                        if (success) {
-                            currency.put(
-                                    from.getDisplayName(),
-                                    currency.get(from.getDisplayName()) - total
-                            );
-                            currency.put(
-                                    to.getDisplayName(),
-                                    currency.get(to.getDisplayName()) + amount
-                            );
-                            currency.put(
-                                    EmperorService.getInstance().getEmpName(),
-                                    currency.get(EmperorService.getInstance().getEmpName()) + tax
-                            );
-                            callback.get();
-                        } else {
-                            from.sendMessage("§4[SYSTEM] Transaction timed out.");
-                        }
-                        return;
-                    });
-            Conversation convo = cf.buildConversation(from);
-            convo.begin();
-            return true;
+            if (EmperorService.getInstance().isEmperor(from.getDisplayName())) {
+                currency.put(from.getDisplayName(), total);
+            } else {
+                return false;
+            }
         }
+        ConversationFactory cf = new ConversationFactory(plugin);
+        cf.withFirstPrompt(new PaymentPrompt(total))
+                .withTimeout(5)
+                .addConversationAbandonedListener((event) -> {
+                    boolean success = event.gracefulExit();
+                    if (success) {
+                        currency.put(
+                                from.getDisplayName(),
+                                currency.get(from.getDisplayName()) - total
+                        );
+                        currency.put(
+                                to.getDisplayName(),
+                                currency.get(to.getDisplayName()) + amount
+                        );
+                        currency.put(
+                                EmperorService.getInstance().getEmpName(),
+                                currency.get(EmperorService.getInstance().getEmpName()) + tax
+                        );
+                        callback.get();
+                    } else {
+                        from.sendMessage("§4[SYSTEM] Transaction timed out.");
+                    }
+                    return;
+                });
+        Conversation convo = cf.buildConversation(from);
+        convo.begin();
+        return true;
     }
 
     public boolean transactTaxFree(Player from, Player to, int amount, Supplier<Boolean> callback) {
