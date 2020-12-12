@@ -7,6 +7,7 @@ import io.github.ellismatthew4.empireeconomy.cmd.SenderContainer;
 import io.github.ellismatthew4.empireeconomy.permissions.EmperorService;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class CommandValidationHelper {
@@ -67,8 +68,8 @@ public class CommandValidationHelper {
         return true;
     }
 
-    public boolean isValidArgCount(int count) {
-        if (commandCall.args.size() != count) {
+    public boolean isValidArgCount(int... count) {
+        if (Arrays.asList(count).contains(commandCall.args.size())) {
             warnAndSend("Incorrect argument count");
             return false;
         }
