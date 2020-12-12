@@ -14,6 +14,6 @@ public class backupEvent {
             for (Player p : plugin.getServer().getOnlinePlayers()) {
                 DataStoreService.getInstance().writeData();
             }
-        }, 0L, 1200);
+        }, 0L, 6000);
     }
 }

@@ -58,4 +58,14 @@ public class DataStoreService {
         }
     }
 
+    public void postTransaction(String shop, int amount) {
+        data.stats.put(
+                shop,
+                new Integer[]{
+                        data.stats.get(shop) == null ? amount : data.stats.get(shop)[0] + amount,
+                        data.stats.get(shop) == null ? 1 : data.stats.get(shop)[1] + 1
+                }
+        );
+    }
+
 }

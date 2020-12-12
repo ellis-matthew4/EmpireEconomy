@@ -99,6 +99,9 @@ commands:
   batchlist:
     description: Goes through all items in your inventory and tries to list each one.
     usage: /batchlist
+  stats:
+    description: Displays today's stats for a given shop. Stand in the shop's zone for the greatest accuracy.
+    usage: /stats <shop>
 permissions:
   ee.*:
     description: Administrator permissions
