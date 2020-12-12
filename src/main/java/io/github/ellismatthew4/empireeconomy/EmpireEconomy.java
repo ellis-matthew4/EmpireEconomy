@@ -59,6 +59,8 @@ public final class EmpireEconomy extends JavaPlugin {
                 .withCommand(new Properties())
                 .withCommand(new Batchlist())
                 .withCommand(new Stats())
+                .withCommand(new Payfine())
+                .withCommand(new Fine())
                 .load(this);
         new EventLoader()
                 .withEvent(new deathListener(this))

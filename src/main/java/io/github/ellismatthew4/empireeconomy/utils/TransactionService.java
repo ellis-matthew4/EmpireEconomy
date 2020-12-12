@@ -61,6 +61,38 @@ public class TransactionService {
         }
     }
 
+    public boolean transactTaxFree(Player from, Player to, int amount, Supplier<Boolean> callback) {
+        int total = amount;
+        Map<String, Integer> currency = DataStoreService.getInstance().data.currency;
+        if (currency.get(from.getDisplayName()) < total) {
+            return false;
+        } else {
+            ConversationFactory cf = new ConversationFactory(plugin);
+            cf.withFirstPrompt(new PaymentPrompt(total))
+                    .withTimeout(5)
+                    .addConversationAbandonedListener((event) -> {
+                        boolean success = event.gracefulExit();
+                        if (success) {
+                            currency.put(
+                                    from.getDisplayName(),
+                                    currency.get(from.getDisplayName()) - total
+                            );
+                            currency.put(
+                                    to.getDisplayName(),
+                                    currency.get(to.getDisplayName()) + amount
+                            );
+                            callback.get();
+                        } else {
+                            from.sendMessage("§4[SYSTEM] Transaction timed out.");
+                        }
+                        return;
+                    });
+            Conversation convo = cf.buildConversation(from);
+            convo.begin();
+            return true;
+        }
+    }
+
     public boolean silentTransact(Player from, Player to, int amount) {
         int tax = getTaxAddon(amount);
         int total = tax + amount;

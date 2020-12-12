@@ -24,6 +24,7 @@ public class Data {
     public Integer warpCreationFee;
     public LocalDate lastStatUpdate;
     public Map<String, Integer[]> stats;
+    public Map<String, Integer> fines;
 
     public void init() {
         if (currency == null) {
@@ -58,6 +59,9 @@ public class Data {
         }
         if (stats == null) {
             stats = new HashMap<>();
+        }
+        if (fines == null) {
+            fines = new HashMap<>();
         }
     }
 
