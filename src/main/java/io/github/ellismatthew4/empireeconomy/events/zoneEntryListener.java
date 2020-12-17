@@ -15,7 +15,7 @@ public class zoneEntryListener {
 
     public zoneEntryListener(JavaPlugin plugin) {
         this.plugin = plugin;
-        this.zoneHandler = new ZoneHandler();
+        this.zoneHandler = ZoneHandler.getInstance();
         cache = new HashMap<Player, Zone>();
         Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
             for (Player p : plugin.getServer().getOnlinePlayers()) {

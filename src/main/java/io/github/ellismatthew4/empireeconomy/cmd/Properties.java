@@ -15,7 +15,7 @@ public class Properties extends PluginCommand {
 
     public Properties() {
         super("properties");
-        this.zoneHandler = new ZoneHandler();
+        this.zoneHandler = ZoneHandler.getInstance();
         this.warpHandler = new WarpHandler();
     }
 

@@ -2,6 +2,7 @@ package io.github.ellismatthew4.empireeconomy.utils;
 
 import io.github.ellismatthew4.empireeconomy.data.Listing;
 import io.github.ellismatthew4.empireeconomy.data.Shop;
+import io.github.ellismatthew4.empireeconomy.data.WLocation;
 import io.github.ellismatthew4.empireeconomy.data.Zone;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -9,10 +10,19 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ZoneHandler {
     private final List<Zone> zones = DataStoreService.getInstance().data.zones;
+    private static ZoneHandler instance;
+
+    public static ZoneHandler getInstance() {
+        if (instance == null) {
+            instance = new ZoneHandler();
+        }
+        return instance;
+    }
 
     public boolean addZone(Player p, Zone z) {
         if (zoneNotExists(z)) {
@@ -60,35 +70,64 @@ public class ZoneHandler {
     }
 
     public Zone getZone(Location l) {
-        for (int i = 0; i < zones.size(); i++) {
-            Zone z = zones.get(i);
-            if (z.inside(l)) {
+        Zone res = bSearch(l);
+        return res == null ? null : res;
+    }
+
+    public Zone getZone(String name) {
+        for (Zone z : zones) {
+            if (z.name.equals(name))
                 return z;
-            }
         }
         return null;
     }
 
-    public Zone getZone(String name) {
-        return bSearch(zones, name);
+    private Zone bSearch(Location key) {
+        if (zones.size() == 0) return null;
+        if (zones.size() == 1) return zones.get(0).inside(key) ? zones.get(0) : null;
+        int index = getNearestIndex(key);
+        if (zones.get(index).inside(key)) {
+            return zones.get(index);
+        }
+        return null;
     }
 
-    private Zone bSearch(List<Zone> zlist, String key) {
-        if (zlist.size() == 0) return null;
-        if (zlist.size() == 1) {
-            return key.compareToIgnoreCase(zlist.get(0).name) == 0 ? zlist.get(0) : null;
+    private Integer getNearestIndex(Location key) {
+        int n = zones.size();
+        if (zones.get(0).inside(key)) {
+            return 0;
         }
-        int i = (int) (zlist.size() / 2);
-        Zone pivot = zlist.get(i);
-        if (key.compareToIgnoreCase(pivot.name) < 0) {
-            return bSearch(zlist.subList(0, i), key);
-        } else if (key.compareToIgnoreCase(pivot.name) > 0) {
-            return bSearch(zlist.subList(i, zlist.size()), key);
+        if (zones.get(n-1).inside(key)) {
+            return n - 1;
+        }
+        int i = 0, j = n, mid = 0;
+        while (i < j) {
+            mid = (i + j) / 2;
+            if (zones.get(mid).inside(key)) {
+                return mid;
+            } else {
+                if (zones.get(mid).compareTo(key) > 0) {
+                    if (mid > 0 && zones.get(mid - 1).compareTo(key) < 0) {
+                        return getClosestZone(mid, mid - 1, key);
+                    }
+                    j = mid;
+                } else {
+                    if (mid < n - 1 && zones.get(mid + 1).compareTo(key) > 0) {
+                        return getClosestZone(mid, mid + 1, key);
+                    }
+                    i = mid + 1;
+                }
+            }
+        }
+        return mid;
+
+    }
+
+    private int getClosestZone(int a, int b, Location key) {
+        if (zones.get(a).midpoint.asLocation().distanceSquared(key) < zones.get(b).midpoint.asLocation().distanceSquared(key)) {
+            return a;
         } else {
-            if (key.compareToIgnoreCase(pivot.name) == 0)
-                return zlist.get(i);
-            else
-                return null;
+            return b;
         }
     }
 

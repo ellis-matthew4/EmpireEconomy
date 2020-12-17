@@ -3,17 +3,21 @@ package io.github.ellismatthew4.empireeconomy.data;
 
 import org.bukkit.Location;
 
-public class Zone extends Property{
+public class Zone extends Property implements Comparable<Zone>{
     public WLocation loc1;
     public WLocation loc2;
     public String msg = "";
     public Shop shop;
+    public Integer distanceToOrigin;
+    public Double angleFromOrigin;
+    public WLocation midpoint;
 
     public Zone(Location loc1, Location loc2, String owner, String name) {
         super(name, owner);
         this.loc1 = new WLocation(loc1);
         this.loc2 = new WLocation(loc2);
         this.shop = null;
+        this.distanceToOrigin = getDistanceToOrigin();
     }
 
     public Zone(Location loc1, Location loc2, String owner, String name, Shop shop) {
@@ -21,6 +25,7 @@ public class Zone extends Property{
         this.loc1 = new WLocation(loc1);
         this.loc2 = new WLocation(loc2);
         this.shop = shop;
+        this.distanceToOrigin = getDistanceToOrigin();
     }
 
     public void addShop(Shop shop) {
@@ -74,5 +79,34 @@ public class Zone extends Property{
         repo = true;
         if (shop != null)
             shop.repo = true;
+    }
+
+    public int getDistanceToOrigin() {
+        double midpointX = (loc1.x + loc2.x) / 2.0;
+        double midpointZ = (loc1.z + loc2.z) / 2.0;
+        midpoint = new WLocation((int) midpointX, (int) midpointZ, loc1.world);
+        angleFromOrigin = (new Vector2(0.0,0.0)).angleTo(midpoint.asVector());
+        return (int) Math.sqrt((midpointX * midpointX) + (midpointZ * midpointX));
+    }
+
+    @Override
+    public int compareTo(Zone z) {
+        if (angleFromOrigin == z.angleFromOrigin) {
+            return distanceToOrigin.compareTo(z.distanceToOrigin);
+        }
+        return angleFromOrigin.compareTo(z.angleFromOrigin);
+    }
+
+    public int compareTo(Location l) {
+        Vector2 vec = new Vector2(l.getX(), l.getZ());
+        double degs = (new Vector2(0.0,0.0)).angleTo(vec);
+        int ldist = (new Vector2(0.0,0.0)).distanceTo(vec);
+        if (angleFromOrigin == null) {
+            distanceToOrigin = getDistanceToOrigin();
+        }
+        if (angleFromOrigin == degs) {
+            return distanceToOrigin.compareTo(ldist);
+        }
+        return angleFromOrigin > degs ? 1 : -1;
     }
 }

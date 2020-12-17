@@ -10,7 +10,7 @@ public class SetMessage extends PluginCommand{
 
     public SetMessage() {
         super("setmessage");
-        this.zoneHandler = new ZoneHandler();
+        this.zoneHandler = ZoneHandler.getInstance();
     }
 
     @Override
