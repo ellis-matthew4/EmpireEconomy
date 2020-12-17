@@ -3,6 +3,8 @@ package io.github.ellismatthew4.empireeconomy.events;
 import io.github.ellismatthew4.empireeconomy.data.Zone;
 import io.github.ellismatthew4.empireeconomy.utils.ZoneHandler;
 import org.bukkit.Bukkit;
+import org.bukkit.Server;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,7 +34,16 @@ public class zoneEntryListener {
             message = z.msg;
         }
         if (!message.isEmpty()) {
-            p.sendMessage(message);
+            if (message.contains(";")) {
+                String[] msgs = message.split(";");
+                Server server = Bukkit.getServer();
+                ConsoleCommandSender sender = server.getConsoleSender();
+
+                server.dispatchCommand(sender, "title " + p.getDisplayName() + " subtitle \"" + msgs[1] +"\"");
+                server.dispatchCommand(sender, "title " + p.getDisplayName() + " title \"" + msgs[0] + "\"");
+            } else {
+                p.sendMessage(message);
+            }
         }
         cache.put(p, z);
     }
