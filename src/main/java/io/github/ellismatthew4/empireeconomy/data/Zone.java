@@ -91,10 +91,10 @@ public class Zone extends Property implements Comparable<Zone>{
 
     @Override
     public int compareTo(Zone z) {
-        if (angleFromOrigin == z.angleFromOrigin) {
-            return distanceToOrigin.compareTo(z.distanceToOrigin);
+        if (distanceToOrigin.equals(z.distanceToOrigin)) {
+            return angleFromOrigin.compareTo(z.angleFromOrigin);
         }
-        return angleFromOrigin.compareTo(z.angleFromOrigin);
+        return distanceToOrigin.compareTo(z.distanceToOrigin);
     }
 
     public int compareTo(Location l) {
@@ -104,9 +104,9 @@ public class Zone extends Property implements Comparable<Zone>{
         if (angleFromOrigin == null) {
             distanceToOrigin = getDistanceToOrigin();
         }
-        if (angleFromOrigin == degs) {
-            return distanceToOrigin.compareTo(ldist);
+        if (distanceToOrigin == degs) {
+            return angleFromOrigin.compareTo(degs);
         }
-        return angleFromOrigin > degs ? 1 : -1;
+        return distanceToOrigin.compareTo(ldist);
     }
 }

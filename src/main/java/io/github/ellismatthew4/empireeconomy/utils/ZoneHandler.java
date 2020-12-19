@@ -20,6 +20,7 @@ public class ZoneHandler {
     public static ZoneHandler getInstance() {
         if (instance == null) {
             instance = new ZoneHandler();
+            Collections.sort(instance.zones);
         }
         return instance;
     }
