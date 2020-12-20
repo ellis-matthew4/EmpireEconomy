@@ -19,8 +19,8 @@ public class Wand extends PluginCommand{
         ItemMeta ism = is.getItemMeta();
         ism.setDisplayName("Zoning Wand");
         is.setItemMeta(ism);
-        if (p.getInventory().getItemInMainHand() != null
-            && p.getInventory().getItemInMainHand().getType() != Material.AIR) {
+        if (p.getInventory().getItemInMainHand() == null
+            || p.getInventory().getItemInMainHand().getType() == Material.AIR) {
             p.getInventory().setItemInMainHand(is);
         } else {
             p.getInventory().addItem(is);

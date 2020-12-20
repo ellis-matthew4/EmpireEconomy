@@ -20,6 +20,7 @@ public class Pardon extends PluginCommand {
         List<String> punished = DataStoreService.getInstance().data.punished;
         new ZoneHandler().pardon(p.getDisplayName());
         new WarpHandler().pardon(p.getDisplayName());
+        DataStoreService.getInstance().data.fines.remove(p.getDisplayName());
         punished.remove(p.getDisplayName());
         p.sendMessage("§4[SYSTEM] The Emperor has pardoned you.");
         return true;

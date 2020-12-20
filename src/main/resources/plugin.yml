@@ -79,11 +79,11 @@ commands:
     description: Transfers a property to another player.
     usage: /transfer <player> <name>
   writ:
-    description: Creates a government-commissioned writ from the held Book and Quill.
-    usage: /writ <title>
+    description: Gives you a Book and Quill or creates a government-commissioned writ from the held Book and Quill.
+    usage: /writ <title (optional)>
   punish:
     description: Repossesses all properties owned by the given player.
-    usage: /punish <player>
+    usage: /punish <player> <fine (optional)>
   pardon:
     description: Returns all properties owned by the given player.
     usage: /pardon <player>
@@ -93,6 +93,21 @@ commands:
   vanish:
     description: Toggles invisibility.
     usage: vanish
+  properties:
+    description: Lists all properties a player owns under a given category.
+    usage: /properties <player> [warps|zones|all]
+  batchlist:
+    description: Goes through all items in your inventory and tries to list each one.
+    usage: /batchlist
+  stats:
+    description: Displays today's stats for a given shop. Stand in the shop's zone for the greatest accuracy.
+    usage: /stats <shop>
+  payfine:
+    description: Pays the given portion of a player's outstanding fine.
+    usage: /payfine <player> <amount>
+  fine:
+    description: Displays your outstanding fine.
+    usage: /fine
 permissions:
   ee.*:
     description: Administrator permissions

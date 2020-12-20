@@ -48,6 +48,10 @@ public class Zone extends Property{
         this.msg = msg;
     }
 
+    public String toString() {
+        return "§e[ZONE] " + name + (shop == null ? "" : ": Shop: " + shop.name);
+    }
+
     @Override
     public void transfer(String newOwner) {
         owner = newOwner;

@@ -5,10 +5,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Writ extends PluginCommand {
 
@@ -20,6 +18,14 @@ public class Writ extends PluginCommand {
     public boolean onCommand(SenderContainer senderContainer, CommandCall commandCall) {
         Player p = senderContainer.getPlayer();
         ItemStack item = p.getInventory().getItemInMainHand();
+        if (commandCall.args.size() == 0) {
+            if (item.getType() == Material.AIR || item == null) {
+                p.getInventory().setItemInMainHand(new ItemStack(Material.WRITABLE_BOOK));
+            } else {
+                p.sendMessage("§4[SYSTEM] You need an empty hand to do that!");
+            }
+            return true;
+        }
         if (item.getType() == Material.WRITABLE_BOOK) {
             BookMeta bm = (BookMeta) item.getItemMeta();
             bm.setAuthor("Emperor " + p.getDisplayName());
@@ -43,6 +49,6 @@ public class Writ extends PluginCommand {
     public boolean validate(SenderContainer senderContainer, CommandCall commandCall) {
         CommandValidationHelper validationHelper = new CommandValidationHelper(this, senderContainer, commandCall);
         return validationHelper.isChallengeInactive(data.challengeActive) && validationHelper.isSenderPlayer()
-                && validationHelper.isValidArgCount(1) && validationHelper.isSenderEmperor();
+                && validationHelper.isValidArgCount(0, 1) && validationHelper.isSenderEmperor();
     }
 }

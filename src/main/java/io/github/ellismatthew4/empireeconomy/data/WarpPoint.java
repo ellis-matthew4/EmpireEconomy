@@ -31,6 +31,10 @@ public class WarpPoint extends Property {
         return true;
     }
 
+    public String toString() {
+        return "§e[WARP] " + name + ": " + location.toString();
+    }
+
     @Override
     public void transfer(String newOwner) {
         if (new WarpHandler().warpExists(name, newOwner)) {

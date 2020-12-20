@@ -17,7 +17,17 @@ public class Punish extends PluginCommand {
     @Override
     public boolean onCommand(SenderContainer senderContainer, CommandCall commandCall) {
         Player p = commandCall.getArg(0).asPlayer();
-        List<String> punished = DataStoreService.getInstance().data.punished;
+        DataStoreService ds = DataStoreService.getInstance();
+        if (commandCall.args.size() == 2) {
+            String arg = commandCall.getArg(1).arg;
+            int fine = (arg == null) ? null : Integer.parseInt(arg);
+            ds.data.fines.put(
+                    p.getDisplayName(),
+                    ds.data.fines.get(p.getDisplayName()) == null ?
+                            fine : ds.data.fines.get(p.getDisplayName()) + fine
+            );
+        }
+        List<String> punished = ds.data.punished;
         WarpHandler wh = new WarpHandler();
         ZoneHandler zh = new ZoneHandler();
         wh.punish(p.getDisplayName());
@@ -30,6 +40,6 @@ public class Punish extends PluginCommand {
     public boolean validate(SenderContainer senderContainer, CommandCall commandCall) {
         CommandValidationHelper validationHelper = new CommandValidationHelper(this, senderContainer, commandCall);
         return validationHelper.isChallengeInactive(data.challengeActive) && validationHelper.isSenderPlayer()
-                && validationHelper.isValidArgCount(1) && validationHelper.isSenderEmperor();
+                && validationHelper.isValidArgCount(1, 2) && validationHelper.isSenderEmperor();
     }
 }

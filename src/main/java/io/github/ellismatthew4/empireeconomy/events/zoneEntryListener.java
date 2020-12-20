@@ -21,7 +21,7 @@ public class zoneEntryListener {
             for (Player p : plugin.getServer().getOnlinePlayers()) {
                 onPlayerWalk(p);
             }
-        }, 0L, 20);
+        }, 0L, 8);
     }
 
     public void onPlayerWalk(Player p) {

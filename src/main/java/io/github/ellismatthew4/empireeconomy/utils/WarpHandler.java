@@ -1,7 +1,7 @@
 package io.github.ellismatthew4.empireeconomy.utils;
 
 import io.github.ellismatthew4.empireeconomy.data.WarpPoint;
-import io.github.ellismatthew4.empireeconomy.data.Zone;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +40,10 @@ public class WarpHandler {
                 return true;
         }
         return false;
+    }
+
+    public List<WarpPoint> warpsByPlayer(Player p) {
+        return (warps.get(p.getDisplayName()) == null ? new ArrayList<WarpPoint>() : warps.get(p.getDisplayName()));
     }
 
     public WarpPoint getWarp(String name, String owner) {
