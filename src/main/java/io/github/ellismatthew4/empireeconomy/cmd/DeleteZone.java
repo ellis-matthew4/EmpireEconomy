@@ -7,7 +7,7 @@ public class DeleteZone extends PluginCommand {
     ZoneHandler zoneHandler;
     public DeleteZone() {
         super("deletezone");
-        this.zoneHandler = new ZoneHandler();
+        this.zoneHandler = ZoneHandler.getInstance();
     }
 
     @Override

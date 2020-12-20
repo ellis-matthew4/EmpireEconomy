@@ -18,7 +18,7 @@ public class Claim extends PluginCommand {
     public Claim(JavaPlugin plugin) {
         super("claim");
         this.plugin = plugin;
-        this.zoneHandler = new ZoneHandler();
+        this.zoneHandler = ZoneHandler.getInstance();
         this.cache = ZoningCache.getInstance();
         this.ts = TransactionService.getInstance();
     }
